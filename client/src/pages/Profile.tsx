@@ -2,7 +2,7 @@ import { Navigate, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 
 import { QUERY_USER, QUERY_ME } from '../utils/queries';
-import FoodList from '../components/FoodList'; // Adjust the path as necessary
+import EmojiList from '../components/EmojiList'; // Adjust the path as necessary
 
 import Auth from '../utils/auth';
 
@@ -42,9 +42,9 @@ const Profile = () => {
         </h2>
 
         <div className="col-12 col-md-10 mb-5">
-          <FoodList
-            foods={user.foods}
-            title={`${user.username}'s food`}
+          <EmojiList
+            emojis={user.emojis}
+            title={`${user.username}'s emojis`}
           />
         </div>
         {!userParam && (

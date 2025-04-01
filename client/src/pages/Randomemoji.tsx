@@ -1,24 +1,24 @@
 import { Navigate, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 
-import { QUERY_USER, QUERY_FOODS_RANDOM } from '../utils/queries';
-import FoodList from '../components/FoodList'; // Adjust the path as necessary
+import { QUERY_USER, QUERY_EMOJIS_RANDOM } from '../utils/queries';
+import EmojiList from '../components/EmojiList'; // Adjust the path as necessary
 
 import Auth from '../utils/auth';
 
-const Randomfoods = () => {
+const Randomemojis = () => {
   const { username: userParam } = useParams();
   const loggedInUsername = Auth.loggedIn() ? Auth.getProfile().data.username : null;
 
-  const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_FOODS_RANDOM, {
+  const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_EMOJIS_RANDOM, {
     variables: { username: userParam || loggedInUsername },
   });
 
-  const user = data?.me || data?.user || (userParam ? {} : { username: ' ', foods: [] });
+  const user = data?.me || data?.user || (userParam ? {} : { username: ' ', emojis: [] });
 
 
   if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
-    return <Navigate to="/randomfoods" />;
+    return <Navigate to="/randomemojis" />;
   }
 
   if (loading) {
@@ -39,8 +39,8 @@ const Randomfoods = () => {
     <div>
       <div className="flex-row justify-center mb-3">
         <div className="col-12 col-md-10 mb-5">
-        <FoodList
-  foods={data?.randomFood ? [data.randomFood] : []} // Wrap single object in an array
+        <EmojiList
+  emojis={data?.randomEmoji ? [data.randomEmoji] : []} // Wrap single object in an array
   title={`${user?.username}`}
 />
         </div>
@@ -57,4 +57,4 @@ const Randomfoods = () => {
   );
 };
 
-export default Randomfoods;
+export default Randomemojis;

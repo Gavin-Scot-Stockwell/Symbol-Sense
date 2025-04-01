@@ -1,4 +1,4 @@
-import Food from './Food.js';
+import Emoji from './Emoji.js';
 import User from './User.js';
 
-export { Food, User };
+export { Emoji, User };
