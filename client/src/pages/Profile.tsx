@@ -33,7 +33,7 @@ const Profile = () => {
       </h4>
     );
   }
-
+  console.log(user, "User data");
   return (
     <div>
       <div className="flex-row justify-center mb-3">
@@ -42,10 +42,10 @@ const Profile = () => {
         </h2>
 
         <div className="col-12 col-md-10 mb-5">
-          <EmojiList
-            emojis={user.emojis}
-            title={`${user.username}'s emojis`}
-          />
+        <EmojiList
+  emojis={user?.emojis || []} // Provide an empty array as a fallback
+  title={`${user?.username}'s emojis`}
+/>
         </div>
         {!userParam && (
           <div

@@ -4,7 +4,7 @@ const typeDefs = `
     username: String
     email: String
     password: String
-    emojis: [Emoji]
+    emojis: [Emoji]!
   }
 
   input UserInput {
