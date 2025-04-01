@@ -1,0 +1,17 @@
+[
+    {
+    "foodText": "Apple",
+    "foodAuthor": "Gavin",
+    "foodDescription": "They are pretty good"
+    },
+    {
+    "foodText": "Banana",
+    "foodAuthor": "Gamer",
+    "foodDescription":"They are pretty long"
+    },
+    {
+    "foodText": "Carrot",
+    "foodAuthor": "Cool",
+    "foodDescription":"They are pretty cool"
+    }
+]
