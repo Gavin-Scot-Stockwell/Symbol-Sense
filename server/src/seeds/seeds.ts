@@ -9,8 +9,10 @@ const seedDatabase = async (): Promise<void> => {
         await db();
         await cleanDB();
 
+        // Create users
         const users = await User.create(userData);
 
+        // Create emojis and associate them with users
         const emojisWithUserIds = emojiData.map((emoji) => {
             const user = users.find((user) => user.username === emoji.emojiAuthor);
             if (!user) {
@@ -21,18 +23,27 @@ const seedDatabase = async (): Promise<void> => {
             return {
                 emojiText: emoji.emojiText,
                 emojiAuthor: user._id,
-                emojiDescription: emoji.emojiDescription
+                emojiDescription: emoji.emojiDescription,
             };
         }).filter(Boolean);
 
-        // Insert the emoji data with the correct emojiAuthor references
-        await Emoji.insertMany(emojisWithUserIds);
+        const emojis = await Emoji.insertMany(emojisWithUserIds);
+
+        // Update users with their associated emojis
+        for (const emoji of emojis) {
+            await User.findByIdAndUpdate(
+                emoji.emojiAuthor,
+                { $push: { emojis: emoji._id } },
+                { new: true }
+            );
+        }
+
         console.log('Seeding completed successfully!');
         process.exit(0);
     } catch (error) {
         console.error('Error seeding database:', error);
         process.exit(1);
     }
-}
+};
 
 seedDatabase();

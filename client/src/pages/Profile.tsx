@@ -61,3 +61,10 @@ const Profile = () => {
 };
 
 export default Profile;
+
+/*
+Profile Stats
+-number of posts
+-number of words written 
+-post rate (post this week)/(this week)
+*/

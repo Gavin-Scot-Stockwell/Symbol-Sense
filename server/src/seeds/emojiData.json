@@ -1,17 +1,167 @@
 [
     {
-    "emojiText": "🍎",
-    "emojiAuthor": "Gavin",
-    "emojiDescription": "red apple"
+        "emojiText": "🍎",
+        "emojiAuthor": "Gavin",
+        "emojiDescription": "red apple"
     },
     {
-    "emojiText": "🍌",
-    "emojiAuthor": "Gamer",
-    "emojiDescription": "banana"
+        "emojiText": "🍌",
+        "emojiAuthor": "Gamer",
+        "emojiDescription": "banana"
     },
     {
-    "emojiText": "🥕",
-    "emojiAuthor": "Cool",
-    "emojiDescription": "carrot"
+        "emojiText": "🥕",
+        "emojiAuthor": "Cool",
+        "emojiDescription": "carrot"
+    },
+    {
+        "emojiText": "🚗",
+        "emojiAuthor": "Gavin",
+        "emojiDescription": "red car"
+    },
+    {
+        "emojiText": "🎮",
+        "emojiAuthor": "Gamer",
+        "emojiDescription": "game controller"
+    },
+    {
+        "emojiText": "🪑",
+        "emojiAuthor": "Cool",
+        "emojiDescription": "chair"
+    },
+    {
+        "emojiText": "📚",
+        "emojiAuthor": "Gavin",
+        "emojiDescription": "books"
+    },
+    {
+        "emojiText": "🖥️",
+        "emojiAuthor": "Gamer",
+        "emojiDescription": "computer"
+    },
+    {
+        "emojiText": "🖊️",
+        "emojiAuthor": "Cool",
+        "emojiDescription": "pen"
+    },
+    {
+        "emojiText": "🌽",
+        "emojiAuthor": "Gavin",
+        "emojiDescription": "corn"
+    },
+    {
+        "emojiText": "🎧",
+        "emojiAuthor": "Gamer",
+        "emojiDescription": "headphones"
+    },
+    {
+        "emojiText": "🛋️",
+        "emojiAuthor": "Cool",
+        "emojiDescription": "sofa"
+    },
+    {
+        "emojiText": "🍇",
+        "emojiAuthor": "Gavin",
+        "emojiDescription": "grapes"
+    },
+    {
+        "emojiText": "🕹️",
+        "emojiAuthor": "Gamer",
+        "emojiDescription": "joystick"
+    },
+    {
+        "emojiText": "🖼️",
+        "emojiAuthor": "Cool",
+        "emojiDescription": "picture frame"
+    },
+    {
+        "emojiText": "🍞",
+        "emojiAuthor": "Gavin",
+        "emojiDescription": "bread"
+    },
+    {
+        "emojiText": "🎲",
+        "emojiAuthor": "Gamer",
+        "emojiDescription": "dice"
+    },
+    {
+        "emojiText": "🪞",
+        "emojiAuthor": "Cool",
+        "emojiDescription": "mirror"
+    },
+    {
+        "emojiText": "🍋",
+        "emojiAuthor": "Gavin",
+        "emojiDescription": "lemon"
+    },
+    {
+        "emojiText": "🕶️",
+        "emojiAuthor": "Gamer",
+        "emojiDescription": "sunglasses"
+    },
+    {
+        "emojiText": "🛏️",
+        "emojiAuthor": "Cool",
+        "emojiDescription": "bed"
+    },
+    {
+        "emojiText": "🍒",
+        "emojiAuthor": "Gavin",
+        "emojiDescription": "cherries"
+    },
+    {
+        "emojiText": "🎧",
+        "emojiAuthor": "Gamer",
+        "emojiDescription": "headphones"
+    },
+    {
+        "emojiText": "🪟",
+        "emojiAuthor": "Cool",
+        "emojiDescription": "window"
+    },
+    {
+        "emojiText": "🍉",
+        "emojiAuthor": "Gavin",
+        "emojiDescription": "watermelon"
+    },
+    {
+        "emojiText": "🎤",
+        "emojiAuthor": "Gamer",
+        "emojiDescription": "microphone"
+    },
+    {
+        "emojiText": "🪜",
+        "emojiAuthor": "Cool",
+        "emojiDescription": "ladder"
+    },
+    {
+        "emojiText": "🍊",
+        "emojiAuthor": "Gavin",
+        "emojiDescription": "orange"
+    },
+    {
+        "emojiText": "🎹",
+        "emojiAuthor": "Gamer",
+        "emojiDescription": "piano"
+    },
+    {
+        "emojiText": "🖌️",
+        "emojiAuthor": "Cool",
+        "emojiDescription": "paintbrush"
+    },
+    {
+        "emojiText": "🍓",
+        "emojiAuthor": "Gavin",
+        "emojiDescription": "strawberry"
+    },
+    {
+        "emojiText": "🎸",
+        "emojiAuthor": "Gamer",
+        "emojiDescription": "guitar"
+    },
+    {
+        "emojiText": "🪑",
+        "emojiAuthor": "Cool",
+        "emojiDescription": "stool"
     }
 ]
