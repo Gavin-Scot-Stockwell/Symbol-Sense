@@ -1,4 +1,4 @@
-import { Food, User } from '../models/index.js'
+import { Emoji, User } from '../models/index.js'
 import { signToken, AuthenticationError } from '../utils/auth.js';
 
 interface AddUserArgs {
@@ -18,60 +18,60 @@ interface UserArgs {
     username: string;
 }
 
-interface FoodArgs {
-    foodId: string;
-    foodAuthor: string,
+interface EmojiArgs {
+    emojiId: string;
+    emojiAuthor: string,
 }
 
-interface AddFoodArgs {
+interface AddEmojiArgs {
     input: {
-        foodText: string;
-        foodDescription: string;
-        foodAuthor: string;
+        emojiText: string;
+        emojiDescription: string;
+        emojiAuthor: string;
     }
 }
 
-interface RemoveFoodArgs {
-    foodId: string;
-    foodDescription: string;
-    foodAuthor: string;
+interface RemoveEmojiArgs {
+    emojiId: string;
+    emojiDescription: string;
+    emojiAuthor: string;
 }
 
 const resolvers = {
     Query: {
         users: async () => {
-            const userReturn = await User.find().populate('foods');
+            const userReturn = await User.find().populate('emojis');
             return userReturn;
         },
         user: async (_parent: any, { username }: UserArgs) => {
-            const userReturn = await User.findOne({ username, Food }).populate({
-                path: 'foods',
-                model: 'Food' // Explicitly reference the model name
+            const userReturn = await User.findOne({ username, Emoji }).populate({
+                path: 'emojis',
+                model: 'Emoji' // Explicitly reference the model name
             });
             return userReturn;
         },
-        foods: async () => {
-            return await Food.find().sort({ createdAt: -1 });
+        emojis: async () => {
+            return await Emoji.find().sort({ createdAt: -1 });
         },
-        food: async (_parent: any, { foodId }: FoodArgs) => {
+        emoji: async (_parent: any, { emojiId }: EmojiArgs) => {
 
-            let foodIdReturn = await Food.findOne({ _id: foodId });
+            let emojiIdReturn = await Emoji.findOne({ _id: emojiId });
 
-            return foodIdReturn
+            return emojiIdReturn
         },
         me: async (_parent: any, _args: any, context: any) => {
             if (context.user) {
-                return User.findOne({ _id: context.user._id }).populate('foods');
+                return User.findOne({ _id: context.user._id }).populate('emojis');
             }
             throw new AuthenticationError('Could not authenticate user.');
         },
-        randomFood: async () => {
-            const randomFood = await Food.aggregate([{ $sample: { size: 1 } }]);
-            return randomFood[0] || null; // Return the first (and only) random food, or null if none found
+        randomEmoji: async () => {
+            const randomEmoji = await Emoji.aggregate([{ $sample: { size: 1 } }]);
+            return randomEmoji[0] || null; // Return the first (and only) random emoji, or null if none found
         },
-        lastFood: async () => {
-            const lastFood = await Food.findOne().sort({ createdAt: -1 }); // Sort by createdAt in descending order
-            return lastFood || null; // Return the last food or null if none exists
+        lastEmoji: async () => {
+            const lastEmoji = await Emoji.findOne().sort({ createdAt: -1 }); // Sort by createdAt in descending order
+            return lastEmoji || null; // Return the last emoji or null if none exists
         },
     },
     Mutation: {
@@ -109,59 +109,59 @@ const resolvers = {
             // Return the token and the user
             return { token, user };
         },
-        addFood: async (_parent: any, { input }: AddFoodArgs, context: any) => {
+        addEmoji: async (_parent: any, { input }: AddEmojiArgs, context: any) => {
             if (!context.user) {
                 throw new AuthenticationError('You need to be logged in!');
             }
 
             try {
-                // Create food and associate it with the logged-in user
-                const food = await Food.create({
+                // Create emoji and associate it with the logged-in user
+                const emoji = await Emoji.create({
                     ...input,
-                    foodAuthor: context.user._id,
+                    emojiAuthor: context.user._id,
                 });
 
-                // Update user with new food reference
+                // Update user with new emoji reference
                 const updatedUser = await User.findOneAndUpdate(
                     { _id: context.user._id },
-                    { $push: { foods: food._id } },
+                    { $push: { emojis: emoji._id } },
                     { new: true }
-                ).populate('foods');
+                ).populate('emojis');
 
                 if (!updatedUser) {
                     throw new Error('User not found');
                 }
 
-                //console.log("Updated user with populated foods:", JSON.stringify(updatedUser, null, 2));
+                //console.log("Updated user with populated emojis:", JSON.stringify(updatedUser, null, 2));
 
                 return updatedUser;
             } catch (error) {
-                console.error("Error adding food:", error);
-                throw new Error("Failed to add food");
+                console.error("Error adding emoji:", error);
+                throw new Error("Failed to add emoji");
             }
         },
 
 
-        removeFood: async (_parent: any, { foodId }: RemoveFoodArgs, context: any) => {
+        removeEmoji: async (_parent: any, { emojiId }: RemoveEmojiArgs, context: any) => {
             if (context.user) {
-                // Find and delete the Food document where foodAuthor matches the user's ObjectId
-                const food = await Food.findOneAndDelete({
-                    _id: foodId,
-                    foodAuthor: context.user._id, // Use the user's ObjectId
+                // Find and delete the Emoji document where emojiAuthor matches the user's ObjectId
+                const emoji = await Emoji.findOneAndDelete({
+                    _id: emojiId,
+                    emojiAuthor: context.user._id, // Use the user's ObjectId
                 });
 
-                // If no matching Food document is found, throw an error
-                if (!food) {
-                    throw new AuthenticationError('Food not found or you are not authorized to delete it.');
+                // If no matching Emoji document is found, throw an error
+                if (!emoji) {
+                    throw new AuthenticationError('Emoji not found or you are not authorized to delete it.');
                 }
 
-                // Remove the reference to the deleted Food from the User's foods array
+                // Remove the reference to the deleted Emoji from the User's emojis array
                 await User.findOneAndUpdate(
                     { _id: context.user._id },
-                    { $pull: { foods: foodId } }
+                    { $pull: { emojis: emojiId } }
                 );
 
-                return food;
+                return emoji;
             }
 
             throw new AuthenticationError('You need to be logged in!');
@@ -171,9 +171,5 @@ const resolvers = {
 
 
 }
-
-
-
-
 
 export default resolvers;

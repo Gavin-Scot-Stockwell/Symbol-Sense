@@ -1,6 +1,5 @@
-
 import { Link } from 'react-router-dom';
-import { type MouseEvent} from 'react';
+import { type MouseEvent } from 'react';
 import Auth from './../utils/auth';
 
 const Header = () => {
@@ -14,9 +13,9 @@ const Header = () => {
       <div className="container flex-row justify-space-between-lg justify-center align-center">
         <div>
           <Link className="text-light" to="/">
-            <h1 className="m-0">Food Lister</h1>
+            <h1 className="m-0">Emoji Lister</h1>
           </Link>
-          <p className="m-0">Food of lists made by food people.</p>
+          <p className="m-0">Emoji of lists made by emoji people.</p>
         </div>
         <div>
           {/* Checking if the user is logged in to conditionally render profile link and logout button */}
@@ -29,11 +28,11 @@ const Header = () => {
               <button className="btn btn-lg btn-light m-2" onClick={logout}>
                 Logout
               </button>
-              <Link className="btn btn-lg btn-light m-2" to="/randomfood">
-                Random Food
+              <Link className="btn btn-lg btn-light m-2" to="/randomemoji">
+                Random Emoji
               </Link>
-              <Link className="btn btn-lg btn-light m-2" to="/addfood">
-                Add Food
+              <Link className="btn btn-lg btn-light m-2" to="/addemoji">
+                Add Emoji
               </Link>
             </>
           ) : (

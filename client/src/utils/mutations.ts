@@ -39,32 +39,34 @@ mutation addUser($input: UserInput!) {
 //   }
 // }
 
-export const ADD_FOOD = gql`
-mutation addFood($input: FoodInput!) {
-  addFood(input: $input) {
+export const ADD_EMOJI = gql`
+mutation addEmoji($input: EmojiInput!) {
+  addEmoji(input: $input) {
     _id
     createdAt
-    foodAuthor
-    foodText
+    emojiAuthor
+    emojiText
+    emojiDescription
   }
 }
 `
 // Example Var
 // {
 //   "input": {
-//     "foodAuthor": "test",
-//     "foodText": "test"
+//     "emojiAuthor": "test",
+//     "emojiText": "test",
+//     "emojiDescription": "test"
 //   }
 // }
 
-export const REMOVE_FOOD = gql`
-mutation removeFood($foodId: ID!) {
-  removeFood(foodId: $foodId) {
+export const REMOVE_EMOJI = gql`
+mutation removeEmoji($emojiId: ID!) {
+  removeEmoji(emojiId: $emojiId) {
     _id
   }
 }`
 
 // Example Var
 // {
-//   "foodId": "67e743b8c2f42bca161ade13"
+//   "emojiId": "67e743b8c2f42bca161ade13"
 // }

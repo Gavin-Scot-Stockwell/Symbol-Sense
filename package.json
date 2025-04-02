@@ -4,7 +4,9 @@
     "seed": "cd server && npm run seed && cd ..",
     "start": "cd server && npm run start && cd ..",
     "start:dev": "concurrently \"cd server && npm run watch\" \"wait-on tcp:3001 && cd client && npm run dev\"",
-    "dev": "cd client && npm run dev && cd .."
+    "dev": "cd client && npm run dev && cd ..",
+    "iall": "npm install && cd server && npm install && cd ../client && npm install"
+
   },
   "dependencies": {
     "express": "^4.21.2",

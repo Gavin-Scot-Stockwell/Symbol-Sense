@@ -8,8 +8,8 @@ import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 import ErrorPage from './pages/Error';
-import RandomFood from './pages/Randomfood';
-import Addfood from './pages/Addfood.js'
+import Randomemojis from './pages/Randomemoji.js';
+import AddEmoji from './pages/Addemoji.js';
 
 const router = createBrowserRouter([
   {
@@ -33,11 +33,11 @@ const router = createBrowserRouter([
         path: '/me',
         element: <Profile />
       },{
-        path: '/randomfood',
-        element: <RandomFood />
+        path: '/randomemoji',
+        element: <Randomemojis />
       },{
-        path: '/addfood',
-        element: <Addfood />
+        path: '/addemoji',
+        element: <AddEmoji />
       },
       
 ]},
