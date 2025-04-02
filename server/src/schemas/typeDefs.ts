@@ -32,6 +32,13 @@ const typeDefs = `
     emojiAuthor: String!
   }
 
+  input EmojiUpdate {
+    emojiId: String!
+    emojiText: String!
+    emojiDescription: String!
+    emojiAuthor: String!
+  }
+
   type Query {
     users: [User]
     user(username: String!): User
@@ -47,6 +54,8 @@ const typeDefs = `
     login(email: String!, password: String!): Auth
     addEmoji(input: EmojiInput!): Emoji
     removeEmoji(emojiId: ID!): Emoji
+    updateEmoji(input: EmojiUpdate!): Emoji
+
   }
 `;
 

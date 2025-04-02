@@ -10,6 +10,7 @@ import Profile from './pages/Profile';
 import ErrorPage from './pages/Error';
 import Randomemojis from './pages/Randomemoji.js';
 import AddEmoji from './pages/Addemoji.js';
+import Updateemoji from './pages/Updateemoji.js';
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
       },{
         path: '/addemoji',
         element: <AddEmoji />
+      },
+      {
+        path: '/updateemoji',
+        element: <Updateemoji />
       },
       
 ]},

@@ -31,6 +31,16 @@ interface AddEmojiArgs {
     }
 }
 
+interface UpdateEmojiArgs {
+    input: {
+        emojiId: string;
+        emojiText: string;
+        emojiDescription: string;
+        emojiAuthor: string;
+    }
+}
+
+
 interface RemoveEmojiArgs {
     emojiId: string;
     emojiDescription: string;
@@ -165,6 +175,34 @@ const resolvers = {
             }
 
             throw new AuthenticationError('You need to be logged in!');
+        },
+
+        updateEmoji: async (_parent: any, { input }: UpdateEmojiArgs, context: any) => {
+            if (!context.user) {
+                throw new AuthenticationError('You need to be logged in!');
+            }
+
+            try {
+                // Create emoji and associate it with the logged-in user
+
+                // Update user with new emoji reference
+                const updatedUser = await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { $push: { emojis: Emoji } },
+                    { new: true }
+                ).populate('emojis');
+
+                if (!updatedUser) {
+                    throw new Error('User not found');
+                }
+
+                //console.log("Updated user with populated emojis:", JSON.stringify(updatedUser, null, 2));
+
+                return updatedUser;
+            } catch (error) {
+                console.error("Error adding emoji:", error);
+                throw new Error("Failed to add emoji");
+            }
         },
 
     },

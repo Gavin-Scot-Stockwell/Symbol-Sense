@@ -70,3 +70,23 @@ mutation removeEmoji($emojiId: ID!) {
 // {
 //   "emojiId": "67e743b8c2f42bca161ade13"
 // }
+
+export const UPDATE_EMOJI = gql`
+mutation updateEmoji($input: EmojiUpdate!) {
+  updateEmoji(input: $input) {
+    _id
+    emojiAuthor
+    emojiDescription
+    emojiText
+    createdAt
+  }
+}`
+
+// Example Var
+// {
+//   "input": {
+//     "emojiAuthor": "67ec6d999facd6e582d5b2f0",
+//     "emojiDescription": "TEST TEST TEST TEST TEST TEST TEST ",
+//     "emojiText": "📚",
+//     "emojiId":"67ec6d999facd6e582d5b2fc"
+// }
