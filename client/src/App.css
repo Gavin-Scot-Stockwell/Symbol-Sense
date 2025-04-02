@@ -42,3 +42,85 @@
   color: #888;
 }
 */
+
+#root {
+  /*max-width: 1280px;*/
+  /*margin: 0 auto;*/
+  /*padding: 2rem;*/
+  /*text-align: center;*/
+  
+
+}
+body {
+  font-family: Arial, sans-serif;/*not sure this works*/
+}
+/*Start of header code*/
+/*Code below targets are option to navigate the page*/
+header > div {
+  text-align: right;
+}
+/*header a,*/
+header button,
+.btn-info,
+.btn {
+  background-color: aqua;
+  color: black;
+  border: 1px solid transparent;
+  border-radius: 0;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+
+
+}
+header button:hover,
+.btn-info:hover,
+.btn:hover {
+  background-color: #337ab7;
+  background-color: #4CAF50;
+  color: white;
+  border: 1px solid transparent;
+  transition: background-color 0.5s ease, transform 0.5s ease;
+
+}
+
+/*Code below targets Title and sub  tile of the site*/
+div > a > h1 {
+  text-align: center;
+  color: white;
+  background-color: #337ab7;
+}
+
+div > p {
+  text-align: center;
+  color: white;
+  background-color: #337ab7;
+}
+
+header a {
+  text-decoration: none;
+}
+
+header a:hover,
+header a:active {
+  text-decoration: none;
+}
+
+/*controls main part of website not footer or header*/
+/* 
+body > div.container > {
+  background-color: white;
+}
+  */
+  /*fixing the submit button size*/
+  .btn-block {
+    width: auto; /* Makes the button width fit its content */
+    display: block; /* Ensures the button doesn't stretch */
+    /*inline-block*/
+}
+.card-body > p,
+.card-header {
+  background-color: white;
+  color:black;
+}
+
+/*Footer Stuff*/
