@@ -75,13 +75,25 @@ header button,
 header button:hover,
 .btn-info:hover,
 .btn:hover {
-  background-color: #337ab7;
   background-color: #4CAF50;
   color: white;
   border: 1px solid transparent;
   transition: background-color 0.5s ease, transform 0.5s ease;
 
 }
+
+body.route-me header a[href="/me"],
+body.route-randomemoji header a[href="/randomemoji"],
+body.route-addemoji header a[href="/addemoji"],
+body.route-login header a[href="/login"],
+body.route-signup header a[href="/signup"]{
+  color: goldenrod;
+}
+
+
+
+
+
 
 /*Code below targets Title and sub  tile of the site*/
 div > a > h1 {

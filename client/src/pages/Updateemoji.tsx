@@ -6,6 +6,7 @@ import { QUERY_LAST_EMOJI } from '../utils/queries';
 
 import { useParams } from 'react-router-dom';
 
+
 const Updateemoji = () => {
   const [formState, setFormState] = useState({
     emojiText: '',
