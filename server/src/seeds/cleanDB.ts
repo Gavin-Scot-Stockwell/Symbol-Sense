@@ -1,11 +1,11 @@
-import { Food, User } from '../models/index.js';
+import { Emoji, User } from '../models/index.js';
 import process from 'process';
 
 const cleanDB = async (): Promise<void> => {
     try {
         // Delete documents from THought collection
-        await Food.deleteMany({});
-        console.log('Food collection cleaned.');
+        await Emoji.deleteMany({});
+        console.log('Emoji collection cleaned.');
 
         // Delete documents from User collection
         await User.deleteMany({});

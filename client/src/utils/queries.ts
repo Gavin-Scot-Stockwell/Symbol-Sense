@@ -7,36 +7,35 @@ query meQ {
     _id
     username
     password
-    foods {
+    emojis {
       _id
       createdAt
-      foodAuthor
-      foodText
-      foodAuthor
+      emojiAuthor
+      emojiText
+      emojiDescription
     }
   }
 }
 `
 
-export const QUERY_FOOD = gql`
-query getFoodQ($foodId: ID!) {
-  food(foodId: $foodId) {
+export const QUERY_EMOJI = gql`
+query getEmojiQ($emojiId: ID!) {
+  emoji(emojiId: $emojiId) {
     _id
-    foodText
-    foodDescription
+    emojiText
+    emojiDescription
   }
-}
-`
+}`
 // Example Var
 // {
-//   "foodId": "67eaf2feba94d24372510b2e"
+//   "emojiId": "67eaf2feba94d24372510b2e"
 // }
 
-export const QUERY_FOODS = gql`
-query getFoodsQ {
-  foods {
-    foodText
-    foodDescription
+export const QUERY_EMOJIS = gql`
+query getEmojisQ {
+  emojis {
+    emojiText
+    emojiDescription
     createdAt
     _id
   }
@@ -61,66 +60,64 @@ query getUserQ($username: String!) {
     username
   }
 }`
-
 // Example Var
 // {
 //     "username": "Gavin"
 // }
 
-export const QUERY_USERS_AND_FOODS = gql`
-query getUsersAndFoodsQ {
+export const QUERY_USERS_AND_EMOJIS = gql`
+query getUsersAndEmojisQ {
   users {
     _id
     email
     username
-    foods {
-      foodText
-      foodDescription
+    emojis {
+      emojiText
+      emojiDescription
       createdAt
       _id
     }
   }
 }`
 
-export const QUERY_USER_AND_FOODS = gql`
-query getUserAndFoodsQ($username: String!) {
+export const QUERY_USER_AND_EMOJIS = gql`
+query getUserAndEmojisQ($username: String!) {
   user(username: $username) {
     _id
     email
     username
-    foods {
-      foodText
-      foodDescription
+    emojis {
+      emojiText
+      emojiDescription
       _id
     }
   }
 }`
-
 // Example Var
 // {
 //     "username": "Gavin"
 // }
 
-export const QUERY_FOODS_RANDOM = gql`
-query getRandomFoodQ {
-  randomFood {
+export const QUERY_EMOJIS_RANDOM = gql`
+query getRandomEmojiQ {
+  randomEmoji {
     _id
-    foodText
-    foodDescription
-    foodAuthor
+    emojiText
+    emojiDescription
+    emojiAuthor
     createdAt
   }
 }
 `
 
-export const QUERY_LAST_FOOD = gql`
-query lastFoodQ {
-  lastFood {
+export const QUERY_LAST_EMOJI = gql`
+query lastEmojiQ {
+  lastEmoji {
     _id
     createdAt
-    foodAuthor
-    foodDescription
-    foodText
+    emojiAuthor
+    emojiDescription
+    emojiText
   }
 }
 `

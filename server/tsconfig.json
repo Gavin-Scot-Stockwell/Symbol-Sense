@@ -26,4 +26,4 @@
       "useUnknownInCatchVariables": true
     },
     "include": ["src/**/*"]
-  }
+}

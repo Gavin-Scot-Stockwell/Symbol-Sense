@@ -2,7 +2,7 @@ import { Navigate, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 
 import { QUERY_USER, QUERY_ME } from '../utils/queries';
-import FoodList from '../components/FoodList'; // Adjust the path as necessary
+import EmojiList from '../components/EmojiList'; // Adjust the path as necessary
 
 import Auth from '../utils/auth';
 
@@ -33,7 +33,7 @@ const Profile = () => {
       </h4>
     );
   }
-
+  console.log(user, "User data");
   return (
     <div>
       <div className="flex-row justify-center mb-3">
@@ -42,10 +42,10 @@ const Profile = () => {
         </h2>
 
         <div className="col-12 col-md-10 mb-5">
-          <FoodList
-            foods={user.foods}
-            title={`${user.username}'s food`}
-          />
+        <EmojiList
+  emojis={user?.emojis || []} // Provide an empty array as a fallback
+  title={`${user?.username}'s emojis`}
+/>
         </div>
         {!userParam && (
           <div
@@ -61,3 +61,10 @@ const Profile = () => {
 };
 
 export default Profile;
+
+/*
+Profile Stats
+-number of posts
+-number of words written 
+-post rate (post this week)/(this week)
+*/

@@ -4,7 +4,7 @@ const typeDefs = `
     username: String
     email: String
     password: String
-    foods: [Food]!
+    emojis: [Emoji]!
   }
 
   input UserInput {
@@ -18,35 +18,35 @@ const typeDefs = `
     user: User
   }
 
- type Food {
-   _id: ID
-   foodText: String
-   foodDescription: String
-   foodAuthor: String
-   createdAt: String
- }
+  type Emoji {
+    _id: ID
+    emojiText: String
+    emojiDescription: String
+    emojiAuthor: String
+    createdAt: String
+  }
 
-  input FoodInput {
-    foodText: String!
-    foodDescription: String!
-    foodAuthor: String!
+  input EmojiInput {
+    emojiText: String!
+    emojiDescription: String!
+    emojiAuthor: String!
   }
 
   type Query {
     users: [User]
     user(username: String!): User
-    foods: [Food]!
-    food(foodId: ID!): Food
+    emojis: [Emoji]!
+    emoji(emojiId: ID!): Emoji
     me: User
-    randomFood: Food
-    lastFood: Food
+    randomEmoji: Emoji
+    lastEmoji: Emoji
   }
 
   type Mutation {
     addUser(input: UserInput!): Auth
     login(email: String!, password: String!): Auth
-    addFood(input: FoodInput!): Food
-    removeFood(foodId: ID!): Food
+    addEmoji(input: EmojiInput!): Emoji
+    removeEmoji(emojiId: ID!): Emoji
   }
 `;
 

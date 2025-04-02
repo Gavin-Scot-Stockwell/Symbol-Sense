@@ -5,7 +5,7 @@ interface IUser extends Document {
     username: string;
     email: string;
     password: string;
-    foods: Schema.Types.ObjectId[];
+    emojis: Schema.Types.ObjectId[];
     isCorrectPassword(password: string): Promise<boolean>;
 }
 
@@ -13,7 +13,7 @@ const UserSchema = new Schema({
     username: { type: String, required: true },
     email: { type: String, required: true },
     password: { type: String, required: true },
-    foods: [{ type: Schema.Types.ObjectId, ref: 'Food' }],
+    emojis: [{ type: Schema.Types.ObjectId, ref: 'Emoji' }],
 },
     {
         timestamps: true,
