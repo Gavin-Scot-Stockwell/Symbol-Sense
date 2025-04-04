@@ -36,7 +36,6 @@ interface UpdateEmojiArgs {
         emojiId: string;
         emojiText: string;
         emojiDescription: string;
-        emojiAuthor: string;
     }
 }
 
@@ -170,7 +169,6 @@ const resolvers = {
                     { _id: context.user._id },
                     { $pull: { emojis: emojiId } }
                 );
-
                 return emoji;
             }
 
@@ -183,25 +181,23 @@ const resolvers = {
             }
 
             try {
-                // Create emoji and associate it with the logged-in user
+                // Update the existing emoji
+                const emoji = await Emoji.findOneAndUpdate(
+                    { _id: input.emojiId }, // Match by emoji ID and author
+                    { emojiText: input.emojiText, emojiDescription: input.emojiDescription }, // Update fields
+                    { new: true, runValidators: true } // Return the updated document and validate the update
+                );
 
-                // Update user with new emoji reference
-                const updatedUser = await User.findOneAndUpdate(
-                    { _id: context.user._id },
-                    { $push: { emojis: Emoji } },
-                    { new: true }
-                ).populate('emojis');
-
-                if (!updatedUser) {
-                    throw new Error('User not found');
+                if (!emoji) {
+                    throw new Error('Emoji not found or you are not authorized to update it.');
                 }
+                console.log("Update argument received:", input);
 
-                //console.log("Updated user with populated emojis:", JSON.stringify(updatedUser, null, 2));
-
-                return updatedUser;
+                // Return the updated emoji
+                return emoji;
             } catch (error) {
-                console.error("Error adding emoji:", error);
-                throw new Error("Failed to add emoji");
+                console.error("Error updating emoji:", error);
+                throw new Error("Failed to update emoji");
             }
         },
 

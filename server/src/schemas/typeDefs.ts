@@ -36,7 +36,7 @@ const typeDefs = `
     emojiId: String!
     emojiText: String!
     emojiDescription: String!
-    emojiAuthor: String!
+
   }
 
   type Query {
