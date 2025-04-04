@@ -1,7 +1,7 @@
 {
   "scripts": {
-    "build": "concurrently \"cd server && npm run build\" \"cd client && npm run build\"",
-    "seed": "cd server && npm run seed && cd ..",
+    "build": "cd server && npm run build && cd ../client && npm run build",
+    "seed": "cd server && npm run seed",
     "start": "cd server && npm run start && cd ..",
     "start:dev": "concurrently \"cd server && npm run watch\" \"wait-on tcp:3001 && cd client && npm run dev\"",
     "dev": "cd client && npm run dev && cd ..",
