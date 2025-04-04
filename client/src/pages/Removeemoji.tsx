@@ -15,10 +15,10 @@ const Removeemoji = () => {
     emojiId: '',
   });
 
-  const [removeEmoji, { error, data: mutationData }] = useMutation(REMOVE_EMOJI);
+  const [removeEmoji, { error,  }] = useMutation(REMOVE_EMOJI);
 
   const { username: userParam } = useParams();
-  const { loading, data, refetch } = useQuery(QUERY_ME, {
+  const { data, refetch } = useQuery(QUERY_ME, {
     variables: { username: userParam },
   });
 
