@@ -96,7 +96,6 @@ const Updateemoji = () => {
                 />
                 <button
                   className="btn btn-block btn-primary"
-                  style={{ cursor: 'pointer' }}
                   type="submit"
                 >
                   Submit
@@ -138,7 +137,6 @@ const Updateemoji = () => {
                 />
                 <button
                   className="btn btn-block btn-primary"
-                  style={{ cursor: 'pointer' }}
                   type="submit"
                 >
                   Submit

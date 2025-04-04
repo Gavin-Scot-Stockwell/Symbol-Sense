@@ -63,34 +63,18 @@ const Randomemojis = () => {
     <div>
       <div className="flex-row justify-center mb-3">
         <div className="col-12 col-md-10 mb-5">
-          <div style = {{ fontSize: '1.5rem', fontWeight: 'bold', textAlign: 'center' }}>
+          <div>
             {data?.randomEmoji?.emojiText || 'No emoji found'}
           </div>
-          <form onSubmit = {handleSubmit} 
-            style = 
-            {{ 
-              textAlign: 'center',
-              margin: '20px 0',
-              padding: '10px',
-            }}>
+          <form onSubmit = {handleSubmit}>
               <input 
                 type='text'
                 placeholder = 'what does this emoji mean'
                 value={userInput}
                 onChange={handleInputChange}
-                style = {{
-                  padding: '12px',
-                  fontSize: '16px',
-                }}
                 />
 
                 <button type = 'submit'
-                  style = {{
-                    padding: '10px 20px',
-                    fontSize: '16px',
-                    marginLeft: '10px',
-                    cursor: 'pointer'
-                  }}
                 >  Submit
                   </button>
                   </form>
@@ -101,7 +85,6 @@ const Randomemojis = () => {
         {!userParam && (
           <div
             className="col-12 col-md-10 mb-3 p-3"
-            style={{ border: '1px dotted #1a1a1a' }}
           >
             {/* Additional content */}
           </div>

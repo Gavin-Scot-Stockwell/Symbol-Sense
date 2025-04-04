@@ -69,6 +69,7 @@ header button,
   border-radius: 0;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
+  transition: background-color 0.5s ease, transform 0.5s ease;
 
 
 }
@@ -78,7 +79,6 @@ header button:hover,
   background-color: #4CAF50;
   color: white;
   border: 1px solid transparent;
-  transition: background-color 0.5s ease, transform 0.5s ease;
 
 }
 
@@ -87,7 +87,8 @@ body.route-randomemoji header a[href="/randomemoji"],
 body.route-addemoji header a[href="/addemoji"],
 body.route-login header a[href="/login"],
 body.route-signup header a[href="/signup"]{
-  color: goldenrod;
+  color: black;
+  background-color: white;
 }
 
 
@@ -126,7 +127,7 @@ body > div.container > {
   /*fixing the submit button size*/
   .btn-block {
     width: auto; /* Makes the button width fit its content */
-    display: block; /* Ensures the button doesn't stretch */
+    display: inline-block; /* Ensures the button doesn't stretch */
     /*inline-block*/
 }
 .card-body > p,
@@ -136,3 +137,119 @@ body > div.container > {
 }
 
 /*Footer Stuff*/
+
+footer{
+  border-top: black dashed 1px;
+}
+
+/* general components */
+button {
+  background-color: aqua;
+  color: black;
+  border: 1px solid transparent;
+  border-radius: 0;
+  border-radius: 5px;
+  transition: background-color 0.5s ease, transform 0.5s ease;
+  cursor: pointer;
+
+}
+
+button:hover {
+  background-color: #4CAF50;
+  color: white;
+  border: 1px solid transparent;
+}
+
+/*
+div.container {
+  margin: 0 auto;
+  max-width: 1200px; 
+  padding: 0 15px; 
+  text-align: center; 
+}
+*/
+/*
+body.route-me header a[href="/me"],
+body.route-randomemoji header a[href="/randomemoji"],
+body.route-addemoji header a[href="/addemoji"],
+body.route-login header a[href="/login"],
+body.route-signup header a[href="/signup"]{
+  color: black;
+  background-color: white;
+}*/
+
+body.route-home div.container h3{
+  text-align: center;
+  font-size: 4rem;
+}
+
+body.route-home .card {
+  border: black solid 2px;
+  border-radius: 5px;
+  margin: 15px;
+}
+
+body.route-home .card h4 {
+  font-size: 1rem;
+  text-align: left;
+ }
+
+ body.route-home .card-body p:nth-child(1){
+  font-size: 6rem;
+}
+
+body.route-home .card-body p:nth-child(2){
+  font-size: 3rem;
+}
+
+/*Focuses on Profile Page*/
+body.route-me div.container h2{
+  text-align: center;
+}
+
+body.route-me div.container h3{
+  text-align: center;
+}
+
+
+body.route-me .card {
+  border: black solid 2px;
+  border-radius: 5px;
+  margin: 15px;
+}
+
+body.route-me .card h4 {
+ font-size: 1rem;
+ text-align: left;
+}
+
+body.route-me .card-body p:nth-child(1){
+  font-size: 6rem;
+}
+
+body.route-me .card-body p:nth-child(2){
+  font-size: 3rem;
+}
+
+/*Random Emoji*/
+
+body.route-randomemoji div.container .col-12 > div {
+  text-align: center;
+  font-size: 6rem;
+}
+
+body.route-randomemoji div.container .col-12 > form{
+  text-align: center;
+  font-size: 3rem;
+}
+
+/*Add Emoji*/
+body.route-addemoji div.container h4{
+  text-align: center;
+  font-size: 3rem;
+}
+
+body.route-addemoji div.container .card-body{
+  text-align: center;
+  font-size: 1.6rem;
+}
