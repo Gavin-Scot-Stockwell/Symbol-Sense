@@ -19,8 +19,12 @@
     "noImplicitReturns": true,
     "noImplicitOverride": true,
     "useUnknownInCatchVariables": true,
+
     "types": ["node"],
-    "resolveJsonModule": true 
+    "typeRoots": ["./node_modules/@types", "../node_modules/@types", "../../node_modules/@types"],
+
+    "resolveJsonModule": true
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*"],
+  "exclude": ["dist"]
 }
