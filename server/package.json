@@ -24,5 +24,8 @@
     "@types/bcrypt": "^5.0.2",
     "@types/jsonwebtoken": "^9.0.9",
     "typescript": "^5.8.2"
-  }
+  },
+  "engines": {
+  "node": "16.x"
+}
 }
