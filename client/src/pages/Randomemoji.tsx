@@ -78,7 +78,7 @@ const Randomemojis = () => {
                 >  Submit
                   </button>
                   </form>
-                  <p style={{ textAlign: 'center', marginTop: '1rem', fontSize: '1.2rem' }}>{feedback}
+                  <p>{feedback}
                   </p>
       
         </div>
