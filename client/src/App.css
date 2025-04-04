@@ -465,5 +465,12 @@ body.route-route-removeemoji div.container .card-body {
     color: black;
     background-color: aqua;
   }
+  header button:hover,
+  .btn-info:hover,
+  .btn:hover,
+  header button.btn.btn-lg:hover {
+    background-color: #4CAF50;
+    color: white;
+  }
     
 }
