@@ -25,7 +25,11 @@
     "@types/jsonwebtoken": "^9.0.9",
     "typescript": "^5.8.2"
   },
-  "engines": {
-  "node": "16.x"
-}
+  "nodemonConfig": {
+    "watch": [
+      "src"
+    ],
+    "ext": "ts,json,js",
+    "exec": "npx tsc && node dist/server.js"
+  }
 }
