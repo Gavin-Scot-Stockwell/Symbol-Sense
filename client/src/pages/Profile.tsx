@@ -1,10 +1,11 @@
-import { Navigate, useParams } from 'react-router-dom';
-import { useQuery } from '@apollo/client';
+import { Navigate, useParams } from "react-router-dom";
+import { useQuery } from "@apollo/client";
+import ProfileAnalysis from "../components/ProfileAnalysis";
 
-import { QUERY_USER, QUERY_ME } from '../utils/queries';
-import EmojiList from '../components/EmojiList'; // Adjust the path as necessary
+import { QUERY_USER, QUERY_ME } from "../utils/queries";
+import EmojiList from "../components/EmojiList"; // Adjust the path as necessary
 
-import Auth from '../utils/auth';
+import Auth from "../utils/auth";
 
 const Profile = () => {
   const { username: userParam } = useParams();
@@ -14,7 +15,7 @@ const Profile = () => {
   });
 
   const user = data?.me || data?.user || {};
-  
+
   // This if condition checks if the user is logged in and if the logged-in user's username matches the userParam.
   if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
     // If the condition is true, it navigates to the "/me" route, which is likely the user's profile page.
@@ -36,24 +37,26 @@ const Profile = () => {
   console.log(user, "User data");
   return (
     <div>
+      <h1>Profile stats:</h1>
+      <ProfileAnalysis title="Test" emojis={[]} />
       <div className="flex-row justify-center mb-3">
         <h2 className="col-12 col-md-10 bg-dark text-light p-3 mb-5">
-          Viewing {userParam ? `${user.username}'s` : 'your'} profile.
+          Viewing {userParam ? `${user.username}'s` : "your"} profile.
         </h2>
 
         <div className="col-12 col-md-10 mb-5">
-        <EmojiList
-  emojis={user?.emojis || []} // Provide an empty array as a fallback
-  title={`${user?.username}'s emojis`}
-/>
+          <EmojiList
+            emojis={user?.emojis || []} // Provide an empty array as a fallback
+            title={`${user?.username}'s emojis`}
+          />
         </div>
         {!userParam && (
           <div
             className="col-12 col-md-10 mb-3 p-3"
-
           >
             
           </div>
+
         )}
       </div>
     </div>

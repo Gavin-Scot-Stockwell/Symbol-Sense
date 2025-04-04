@@ -25,7 +25,8 @@ const EmojiList: React.FC<EmojiListProps> = ({ emojis, title }) => {
             <h4 className="card-header bg-primary text-light p-2 m-0">
               {} <br />
               <span>
-                EMOJI WAS MADE AT {new Date(Number(emoji.createdAt)).toLocaleString()}
+                EMOJI WAS MADE AT{" "}
+                {new Date(Number(emoji.createdAt)).toLocaleString()}
               </span>
             </h4>
             <div className="card-body bg-light p-2">
