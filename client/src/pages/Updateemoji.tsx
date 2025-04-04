@@ -1,34 +1,44 @@
 import { useState, type FormEvent, type ChangeEvent } from 'react';
-
 import { useMutation, useQuery } from '@apollo/client';
 import { UPDATE_EMOJI } from '../utils/mutations';
-import { QUERY_LAST_EMOJI } from '../utils/queries';
-
+import { QUERY_ME } from '../utils/queries'; // Removed QUERY_LAST_EMOJI
 import { useParams } from 'react-router-dom';
+//import LastPosted from '../components/LastPosted';
+
+interface Emoji {
+  _id: string;
+  emojiText: string;
+  emojiDescription: string;
+}
 
 
 const Updateemoji = () => {
   const [formState, setFormState] = useState({
     emojiText: '',
     emojiDescription: '',
-    emojiAuthor: '',
-    emojiId:'',
+    emojiId: '',
   });
 
   const [addEmoji, { error, data: mutationData }] = useMutation(UPDATE_EMOJI);
 
   const { username: userParam } = useParams();
-  const { loading, data, refetch } = useQuery(QUERY_LAST_EMOJI, {
+  const { loading, data, refetch } = useQuery(QUERY_ME, {
     variables: { username: userParam },
   });
 
-  if (loading) {
-    return <div>Loading...</div>;
+  if (!loading && data) {
+    const emojiData = data.me.lastEmoji; // Adjusted to use QUERY_ME
+    if (emojiData && formState.emojiId === '') {
+      setFormState({
+        emojiText: emojiData.emojiText || '',
+        emojiDescription: emojiData.emojiDescription || '',
+        emojiId: emojiData._id || '',
+      });
+    }
   }
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = event.target;
-
     setFormState({
       ...formState,
       [name]: value,
@@ -51,6 +61,7 @@ const Updateemoji = () => {
       console.error(e);
     }
   };
+//<LastPosted lastEmoji={data?.me?.lastEmoji || null} />
 
   return (
     <main className="flex-row justify-center mb-4">
@@ -58,10 +69,8 @@ const Updateemoji = () => {
         <div className="card">
           <h4 className="card-header bg-dark text-light p-2">Add Emoji!</h4>
           <div className="card-body">
-            {mutationData ? (
+                        {mutationData ? (
               <form onSubmit={handleFormSubmit}>
-                <p>Your emoji has been added {data.lastEmoji.emojiText}</p>
-
                 <input
                   className="form-input"
                   placeholder="Emoji Name"
@@ -78,22 +87,23 @@ const Updateemoji = () => {
                   value={formState.emojiDescription}
                   onChange={handleChange}
                 />
-                <input
+                <label htmlFor="id-select">Choose Emoji</label>
+                <select
                   className="form-input"
-                  placeholder="Emoji Author"
-                  name="emojiAuthor"
-                  type="text"
-                  value={formState.emojiAuthor}
-                  onChange={handleChange}
-                />
-                <input
-                  className="form-input"
-                  placeholder="Emoji ID"
                   name="emojiId"
-                  type="text"
-                  value={formState.emojiId}
                   onChange={handleChange}
-                />
+                  value={formState.emojiId}
+                >
+                  <option value="" disabled>
+                    Select an Emoji
+                  </option>
+                  {data &&
+                    data.me.emojis.map((emoji: { _id: string; emojiText: string }) => (
+                      <option key={emoji._id} value={emoji._id}>
+                        {emoji.emojiText} ({emoji._id})
+                      </option>
+                    ))}
+                </select>
                 <button
                   className="btn btn-block btn-primary"
                   type="submit"
@@ -119,22 +129,23 @@ const Updateemoji = () => {
                   value={formState.emojiDescription}
                   onChange={handleChange}
                 />
-                <input
+                <label htmlFor="id-select">Choose Emoji</label>
+                <select
                   className="form-input"
-                  placeholder="Emoji Author"
-                  name="emojiAuthor"
-                  type="text"
-                  value={formState.emojiAuthor}
-                  onChange={handleChange}
-                />
-                <input
-                  className="form-input"
-                  placeholder="Emoji ID"
                   name="emojiId"
-                  type="text"
-                  value={formState.emojiId}
                   onChange={handleChange}
-                />
+                  value={formState.emojiId}
+                >
+                  <option value="" disabled>
+                    Select an Emoji
+                  </option>
+                  {data &&
+                    data.me.emojis.map((emoji: Emoji) => (
+                      <option key={emoji._id} value={emoji._id}>
+                        {emoji.emojiText} ({emoji._id})
+                      </option>
+                    ))}
+                </select>
                 <button
                   className="btn btn-block btn-primary"
                   type="submit"

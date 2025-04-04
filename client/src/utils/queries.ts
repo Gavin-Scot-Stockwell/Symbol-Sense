@@ -113,9 +113,6 @@ query getRandomEmojiQ {
 export const QUERY_LAST_EMOJI = gql`
 query lastEmojiQ {
   lastEmoji {
-    _id
-    createdAt
-    emojiAuthor
     emojiDescription
     emojiText
   }

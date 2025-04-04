@@ -31,7 +31,6 @@ const EmojiList: React.FC<EmojiListProps> = ({ emojis, title }) => {
             </h4>
             <div className="card-body bg-light p-2">
               <p>{emoji.emojiText}</p>
-              <p>{emoji.emojiDescription}</p>
             </div>
           </div>
         ))}

@@ -11,6 +11,7 @@ import ErrorPage from './pages/Error';
 import Randomemojis from './pages/Randomemoji.js';
 import AddEmoji from './pages/Addemoji.js';
 import Updateemoji from './pages/Updateemoji.js';
+import Removeemoji from './pages/Removeemoji.js';
 
 const router = createBrowserRouter([
   {
@@ -39,10 +40,12 @@ const router = createBrowserRouter([
       },{
         path: '/addemoji',
         element: <AddEmoji />
-      },
-      {
+      },{
         path: '/updateemoji',
         element: <Updateemoji />
+      },{
+        path: '/removeemoji',
+        element: <Removeemoji />
       },
       
 ]},
