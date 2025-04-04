@@ -5,7 +5,7 @@
     "start": "cd server && npm run start && cd ..",
     "start:dev": "concurrently \"cd server && npm run watch\" \"wait-on tcp:3001 && cd client && npm run dev\"",
     "dev": "cd client && npm run dev && cd ..",
-    "all": "npm install && cd server && npm install && cd ../client && npm install"
+    "all": "npm install --force && cd server && npm install --force && cd ../client && npm install --force"
   },
   "dependencies": {
     "@apollo/server": "^4.11.3",
