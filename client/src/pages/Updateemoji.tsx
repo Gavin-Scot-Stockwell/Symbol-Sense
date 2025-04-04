@@ -6,6 +6,7 @@ import { QUERY_LAST_EMOJI } from '../utils/queries';
 
 import { useParams } from 'react-router-dom';
 
+
 const Updateemoji = () => {
   const [formState, setFormState] = useState({
     emojiText: '',
@@ -95,7 +96,6 @@ const Updateemoji = () => {
                 />
                 <button
                   className="btn btn-block btn-primary"
-                  style={{ cursor: 'pointer' }}
                   type="submit"
                 >
                   Submit
@@ -137,7 +137,6 @@ const Updateemoji = () => {
                 />
                 <button
                   className="btn btn-block btn-primary"
-                  style={{ cursor: 'pointer' }}
                   type="submit"
                 >
                   Submit

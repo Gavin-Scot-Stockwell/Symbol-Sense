@@ -6,6 +6,8 @@ import { ADD_USER } from '../utils/mutations';
 
 import Auth from '../utils/auth';
 
+
+
 const Signup = () => {
   const [formState, setFormState] = useState({
     username: '',
@@ -76,7 +78,6 @@ const Signup = () => {
                 />
                 <button
                   className="btn btn-block btn-primary"
-                  style={{ cursor: 'pointer' }}
                   type="submit"
                 >
                   Submit
