@@ -38,7 +38,8 @@ const Profile = () => {
   return (
     <div>
       <h1>Profile stats:</h1>
-      <ProfileAnalysis title="Test" emojis={[]} />
+      {/* <ProfileAnalysis title="Test" emojis={[]} /> */}
+      <ProfileAnalysis />
       <div className="flex-row justify-center mb-3">
         <h2 className="col-12 col-md-10 bg-dark text-light p-3 mb-5">
           Viewing {userParam ? `${user.username}'s` : "your"} profile.
@@ -50,14 +51,7 @@ const Profile = () => {
             title={`${user?.username}'s emojis`}
           />
         </div>
-        {!userParam && (
-          <div
-            className="col-12 col-md-10 mb-3 p-3"
-          >
-            
-          </div>
-
-        )}
+        {!userParam && <div className="col-12 col-md-10 mb-3 p-3"></div>}
       </div>
     </div>
   );
