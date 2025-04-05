@@ -24,6 +24,7 @@ const typeDefs = `
     emojiDescription: String
     emojiAuthor: String
     createdAt: String
+    wordCount: Int
   }
 
   input EmojiInput {

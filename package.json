@@ -5,7 +5,8 @@
     "start": "cd server && npm run start && cd ..",
     "start:dev": "concurrently \"cd server && npm run watch\" \"wait-on tcp:3001 && cd client && npm run dev\"",
     "dev": "cd client && npm run dev && cd ..",
-    "all": "npm install && cd server && npm install && cd ../client && npm install"
+    "all": "npm install && cd server && npm install && cd ../client && npm install",
+    "render-build": "npm install && npm run build"
   },
   "dependencies": {
     "express": "^4.21.2",
