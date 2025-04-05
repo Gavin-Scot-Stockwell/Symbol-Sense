@@ -1,66 +1,29 @@
+import { useQuery } from "@apollo/client";
+import { QUERY_ME } from "../utils/queries";
+import { useState } from "react";
+
 interface Emoji {
   _id: string;
   emojiAuthor: string;
   createdAt: string;
   emojiText: string;
   emojiDescription: string;
+  wordCount: number;
 }
 
-interface EmojiListProps {
-  emojis: Emoji[];
-  title: string;
-}
-
-const ProfileAnalysis: React.FC<EmojiListProps> = ({ emojis }) => {
-  // If emojis array is empty, return a message indicating that
-  if (!emojis.length) {
-    return <p> Number of Posts</p>;
-  }
-
-  // Log emojis to the console (this could also be done in useEffect)
-  console.log("Emojis:", emojis);
-
-  // Calculate the total number of words
-  const wordCount = emojis.reduce((acc: number, emoji: Emoji) => {
-    // Split each emoji by spaces to count words
-    const words = emoji.emojiText.split(" ").filter((word) => word.length > 0);
-    return acc + words.length;
-  }, 0);
-
-  // If emojis array is empty, return a message indicating that
-  if (!wordCount) {
-    return (
-      <div>
-        <p>No words available</p>
-      </div>
-    );
-  }
-
+// const ProfileAnalysis: React.FC<EmojiListProps> = ({ emojis }) => {
+const ProfileAnalysis: React.FC = () => {
+  const { data } = useQuery(QUERY_ME);
+  const user = data?.me || {};
+  const [wordCount] = useState(() =>
+    user.emojis.reduce((acc: number, emoji: Emoji) => acc + emoji.wordCount, 0)
+  );
+  const [postCount] = useState(() => user.emojis.length);
   return (
     <>
-      <div>
-        {/* Display the total number of words */}
-        <h1>Number of Words: {wordCount}</h1>
-
-        {/* Render the list of emojis/words */}
-        <ul>
-          {emojis.map((emoji, index) => (
-            <li key={index}>{emoji.emojiText}</li>
-          ))}
-        </ul>
-      </div>
-      <div>
-        {/* Display the number of emojis */}
-        <h1>Number of Emojis: {emojis.length}</h1>
-
-        {/* Render the list of emojis */}
-        <ul>
-          {emojis.map((emoji, index) => (
-            <li key={index}>{emoji.emojiText}</li>
-          ))}
-        </ul>
-      </div>
-      ;
+      {/* Display the total number of words */}
+      <h2>Number of Words: {wordCount}</h2>
+      <h2>Number of Posts: {postCount}</h2>
     </>
     // // Calculate the total number of words
     // const wordCount = EmojiList.reduce((acc: number, emoji: Emoji) => {
