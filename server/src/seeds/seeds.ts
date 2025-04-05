@@ -2,7 +2,7 @@ import db from '../config/connection.js';
 import { Emoji, User } from '../models/index.js';
 import cleanDB from './cleanDB.js';
 import userData from './userData.json' with { type: 'json' };
-import emojiData from './EmojiData.json' with { type: 'json' };
+import emojiData from './emojiData.json' with { type: 'json' };
 
 const seedDatabase = async (): Promise<void> => {
     try {
