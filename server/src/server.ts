@@ -9,7 +9,7 @@ import { authenticateToken } from './utils/auth.js';
 import dotenv from 'dotenv';
 dotenv.config();
 
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath } from 'url';
 import { dirname } from 'node:path';
 
 // Shim __dirname for ESM
@@ -44,7 +44,15 @@ const startApolloServer = async () => {
     }));
 
     if (process.env.NODE_ENV === 'production') {
-        app.use(express.static(path.join(__dirname, '../client/dist')));
+
+        const __filename = fileURLToPath(import.meta.url);
+        const __dirname = path.dirname(__filename);
+
+        app.use(express.static(path.join(__dirname, '../../client/dist')));
+
+        app.get('*', (_req: Request, res: Response) => {
+            res.sendFile(path.join(__dirname, '../../client/dist/index.html'));
+        });
 
         app.get('*', (_req: Request, res: Response) => {
             res.sendFile(path.join(__dirname, '../client/dist/index.html'));
