@@ -18,8 +18,13 @@ const server = new ApolloServer({
 });
 
 const startApolloServer = async () => {
-    await server.start();
-    await db();
+    try {
+        await server.start();
+        await db();  // Ensure this resolves successfully before starting the app
+    } catch (error) {
+        console.error("Error starting Apollo Server or DB connection:", error);
+        process.exit(1);  // Exit if there's an error
+    }
 
     const PORT = process.env.PORT || 3001;
     const app = express();
@@ -27,11 +32,9 @@ const startApolloServer = async () => {
     app.use(express.urlencoded({ extended: false }));
     app.use(express.json());
 
-    app.use('/graphql', expressMiddleware(server as any,
-        {
-            context: authenticateToken as any
-        }
-    ));
+    app.use('/graphql', expressMiddleware(server as any, {
+        context: authenticateToken as any
+    }));
 
     if (process.env.NODE_ENV === 'production') {
         app.use(express.static(path.join(__dirname, '../client/dist')));
