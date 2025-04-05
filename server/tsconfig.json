@@ -16,6 +16,7 @@
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     /* Type Checking */
+
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
@@ -28,4 +29,5 @@
     "resolveJsonModule": true
   },
   "include": ["src/**/*"]
+
 }

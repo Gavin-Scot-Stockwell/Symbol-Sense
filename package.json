@@ -1,19 +1,33 @@
 {
   "scripts": {
-    "build": "concurrently \"cd server && npm run build\" \"cd client && npm run build\"",
-    "seed": "cd server && npm run seed && cd ..",
+    "build": "cd server && npm run build && cd ../client && npm run build",
+    "seed": "cd server && npm run seed",
     "start": "cd server && npm run start && cd ..",
     "start:dev": "concurrently \"cd server && npm run watch\" \"wait-on tcp:3001 && cd client && npm run dev\"",
     "dev": "cd client && npm run dev && cd ..",
     "all": "npm install && cd server && npm install && cd ../client && npm install"
   },
   "dependencies": {
+    "@apollo/server": "^4.11.3",
+    "bcrypt": "^5.1.1",
+    "concurrently": "^9.1.2",
+    "dotenv": "^16.4.7",
     "express": "^4.21.2",
+    "graphql": "^16.10.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.13.2",
     "vite": "^6.2.3"
   },
   "devDependencies": {
-    "concurrently": "^8.2.0",
+    "@types/bcrypt": "^5.0.2",
+    "@types/express": "^5.0.1",
+    "@types/graphql": "^14.2.3",
+    "@types/jsonwebtoken": "^9.0.9",
+    "@types/mongoose": "^5.11.96",
+    "@types/node": "^22.14.0",
     "nodemon": "^3.1.9",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.2",
     "wait-on": "^8.0.3"
   }
 }
