@@ -12,10 +12,10 @@ jobs:
     name: Deploy To Render
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4  # Corrected this line to use the correct action
 
       - name: Deploy
-        if: github.ref == 'refs/heads/actions'  # Make sure the deployment only happens on ''
+        if: github.ref == 'refs/heads/main'  # Ensure the deployment happens on 'main' branch
         env:
           deploy_url: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
         run: |
