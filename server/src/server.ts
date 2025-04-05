@@ -1,23 +1,21 @@
 import express from 'express';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import type { Request, Response } from 'express';
 import db from './config/connection.js';
 import { ApolloServer } from '@apollo/server';
 import { expressMiddleware } from '@apollo/server/express4';
 import { typeDefs, resolvers } from './schemas/index.js';
 import { authenticateToken } from './utils/auth.js';
+
 import dotenv from 'dotenv';
 dotenv.config();
-
-import { fileURLToPath } from 'url';
-import { dirname } from 'node:path';
-
-// Shim __dirname for ESM
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
 console.log('MongoDB URI:', process.env.MONGODB_URI);
 console.log('JWT Secret Key:', process.env.JWT_SECRET_KEY);
+
+// 👇 Set up __dirname for ES Modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const server = new ApolloServer({
     typeDefs,
@@ -27,10 +25,10 @@ const server = new ApolloServer({
 const startApolloServer = async () => {
     try {
         await server.start();
-        await db();
+        await db();  // Ensure this resolves successfully before starting the app
     } catch (error) {
         console.error("Error starting Apollo Server or DB connection:", error);
-        process.exit(1);
+        process.exit(1);  // Exit if there's an error
     }
 
     const PORT = process.env.PORT || 3001;
@@ -44,18 +42,12 @@ const startApolloServer = async () => {
     }));
 
     if (process.env.NODE_ENV === 'production') {
-
-        const __filename = fileURLToPath(import.meta.url);
-        const __dirname = path.dirname(__filename);
-
+        // Serve static files from the client build folder
         app.use(express.static(path.join(__dirname, '../../client/dist')));
 
+        // Fallback route to serve index.html for single-page apps
         app.get('*', (_req: Request, res: Response) => {
             res.sendFile(path.join(__dirname, '../../client/dist/index.html'));
-        });
-
-        app.get('*', (_req: Request, res: Response) => {
-            res.sendFile(path.join(__dirname, '../client/dist/index.html'));
         });
     }
 
