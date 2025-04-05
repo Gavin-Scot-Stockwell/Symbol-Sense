@@ -2,10 +2,10 @@ name: Deploy To Render
 
 on:
   push:
-    branches: [actions]  # Trigger deploy on push to the 'actions' branch
+    branches: [main]  # Trigger deploy on push to the 'main' branch
   pull_request:
     branches:
-      - actions  # Trigger deploy on pull request targeting 'actions' branch
+      - main  # Trigger deploy on pull request targeting 'main' branch
 
 jobs:
   ci:
@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Deploy
-        if: github.ref == 'refs/heads/actions'  # Make sure the deployment only happens on 'actions'
+        if: github.ref == 'refs/heads/actions'  # Make sure the deployment only happens on ''
         env:
           deploy_url: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
         run: |
