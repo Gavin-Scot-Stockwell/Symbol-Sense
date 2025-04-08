@@ -83,7 +83,7 @@ const Randomemojis = () => {
           <form onSubmit = {handleSubmit}>
               <input 
                 type='text'
-                placeholder = 'what does this emoji mean'
+                placeholder = 'what do these emoji mean?'
                 value={userInput}
                 onChange={handleInputChange}
                 />
