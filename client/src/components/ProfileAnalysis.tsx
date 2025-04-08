@@ -26,20 +26,9 @@ const ProfileAnalysis: React.FC = () => {
       <h2>Number of Posts: {postCount}</h2>
     </>
     // // Calculate the total number of words
-    // const wordCount = EmojiList.reduce((acc: number, emoji: Emoji) => {
-    //   // Split each emoji by spaces to count words
-    //   const words = emoji.emojiText.split(" ").filter((word) => word.length > 0);
-    //   return acc + words.length;
-    // }, 0);
 
-    // // If emojis array is empty, return a message indicating that
-    // if (!wordCount) {
-    //   return (
-    //     <div>
-    //       <p>No words available</p>
-    //     </div>
-    //   );
-    // }
+    // If emojis array is empty, return a message indicating that
+
     // <div>
     //   {/* Display the total number of words */}
     //   <h1>Number of Words: {wordCount}</h1>
@@ -53,14 +42,6 @@ const ProfileAnalysis: React.FC = () => {
     // </div>;
 
     // // Calculate the start of the current week (7 days ago)
-    // const startOfWeek = new Date(today);
-    // startOfWeek.setDate(today.getDate() - 7); // Subtract 7 days to get the start of the week
-
-    // // Filter posts made in the past 7 days
-    // const weeklyPosts = posts.filter((post) => {
-    //   const postDate = new Date(post.timestamp);
-    //   return postDate >= startOfWeek; // Keep posts that are within the last 7 days
-    // });
 
     // // Calculate the weekly post rate
     // const weeklyPostRate = weeklyPosts.length;
@@ -80,36 +61,6 @@ const ProfileAnalysis: React.FC = () => {
 };
 
 export default ProfileAnalysis;
-
-//           return (
-//             <div className="profile-container">
-//               <div className="profile-header">
-//                 <img src={emojis} alt={`${user.emojiText}'s profile`} />
-//                 <h1>{user.name}</h1>
-//               </div>
-// {/*
-
-//           <div className="profile-stats">
-//             <div className="stat">
-//               <p>Posts</p>
-//               <p>{user.posts}</p>
-//             </div>
-//             <div className="stat">
-//               <p>Number of Words Writen</p>
-//               <p>{user.words}</p>
-//             </div>
-
-//             <div className="stat">
-//               <p>Weekly Post Rate</p>
-//               <p>{user.avgRating}</p>
-//             </div>
-//           </div> */}
-//         </div>
-//       );
-//     };
-// };
-
-// export default ProfileAnalysis;
 
 /*
 
