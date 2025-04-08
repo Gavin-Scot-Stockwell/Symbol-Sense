@@ -1,0 +1,23 @@
+name: Deploy To Render
+
+on:
+  push:
+    branches: [main]  # Trigger deploy on push to the 'main' branch
+  pull_request:
+    branches:
+      - main  # Trigger deploy on pull request targeting 'main' branch
+
+jobs:
+  ci:
+    name: Deploy To Render
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4  # Corrected this line to use the correct action
+
+      - name: Deploy
+        if: github.ref == 'refs/heads/main'  # Ensure the deployment happens on 'main' branch
+        env:
+          deploy_url: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+        run: |
+          echo "Deploy URL: $deploy_url"  # Debugging step to ensure URL is being set
+          curl "$deploy_url"

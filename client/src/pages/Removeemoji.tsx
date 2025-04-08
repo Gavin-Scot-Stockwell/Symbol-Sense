@@ -68,7 +68,7 @@ const Removeemoji = () => {
                 {data &&
                   data.me.emojis.map((emoji: Emoji) => (
                     <option key={emoji._id} value={emoji._id}>
-                      {emoji.emojiText} ({emoji._id})
+                      {emoji.emojiText} ({emoji.emojiDescription})
                     </option>
                   ))}
               </select>

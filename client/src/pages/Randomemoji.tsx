@@ -9,12 +9,13 @@ const Randomemojis = () => {
   const { username: userParam } = useParams();
   const loggedInUsername = Auth.loggedIn() ? Auth.getProfile().data.username : null;
 
-  const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_EMOJIS_RANDOM, {
+  const { loading, data, refetch} = useQuery(userParam ? QUERY_USER : QUERY_EMOJIS_RANDOM, {
     variables: { username: userParam || loggedInUsername },
   });
 
   const [userInput, setUserInput] = useState('');
   const [feedback, setFeedback] = useState('');
+  const [nextButton, setNextButton] = useState('Next'); // when the user sumbits the answer, this will change toNext after the answer 
 
   const user = data?.me || data?.user || (userParam ? {} : { username: ' ', emojis: [] });
 
@@ -44,19 +45,32 @@ const Randomemojis = () => {
 
   const handleSubmit = (event : React.FormEvent) => {
     event.preventDefault(); // Prevent the form from submitting and refreshing the page
-
   const correctAnswer = data?.randomEmoji?.emojiDescription || ''; 
-  
+
    if (userInput.toLowerCase() === correctAnswer.toLowerCase()) {
     setFeedback('Correct!'); 
+
+    setNextButton('Congrats, guess the next emoji!');  
+    
    }
    else {
     setFeedback('Try again!'); 
+
+    setNextButton('Too tough? Here is a hint: ' + correctAnswer);
    }
     // now its gonna empty the input 
     setUserInput('');
   };
 
+  // here this function to refetch to random emoji next button
+  const handleNext = () => {
+    refetch (); 
+    setFeedback(''); 
+    setUserInput('');
+    setNextButton('Next');
+  };
+
+//
 
 
   return (
@@ -69,7 +83,7 @@ const Randomemojis = () => {
           <form onSubmit = {handleSubmit}>
               <input 
                 type='text'
-                placeholder = 'what does this emoji mean'
+                placeholder = 'what do these emoji mean?'
                 value={userInput}
                 onChange={handleInputChange}
                 />
@@ -80,6 +94,13 @@ const Randomemojis = () => {
                   </form>
                   <p>{feedback}
                   </p>
+
+                <button
+                  onClick = {handleNext}
+                 
+                >
+                  {nextButton}
+                </button>
       
         </div>
         {!userParam && (
@@ -93,6 +114,8 @@ const Randomemojis = () => {
     </div>
   );
 };
+
+
 
 
 
