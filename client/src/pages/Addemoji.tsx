@@ -101,14 +101,6 @@ const AddEmoji = () => {
                   onChange={handleChange}
                   maxLength={1}
                 />
-                <input
-                  className="form-input"
-                  placeholder="Emoji Author"
-                  name="emojiAuthor"
-                  type="text"
-                  value={formState.emojiAuthor}
-                  onChange={handleChange}
-                />
                 <button
                   className="btn btn-block btn-primary"
                   type="submit"
@@ -134,14 +126,7 @@ const AddEmoji = () => {
                   value={formState.emojiDescription}
                   onChange={handleChange}
                 />
-                <input
-                  className="form-input"
-                  placeholder="Emoji Author"
-                  name="emojiAuthor"
-                  type="text"
-                  value={formState.emojiAuthor}
-                  onChange={handleChange}
-                />
+
                 <button
                   className="btn btn-block btn-primary"
                   type="submit"
