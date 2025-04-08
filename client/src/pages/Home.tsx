@@ -69,13 +69,19 @@ const Home = () => {
         </div>
       </div>
       <style>
-        {`
-          @keyframes fade {
-            0% { opacity: 0; }
-            50% { opacity: 1; }
-            100% { opacity: 0; }
-          }
-        `}
+      {`
+    @keyframes fade {
+      0% {
+        transform: scale(0.5);
+      }
+      50% {
+        transform: scale(1);
+      }
+      100% {
+        transform: scale(0.5);
+      }
+    }
+  `}
       </style>
     </div>
   );
