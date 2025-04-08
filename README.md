@@ -69,8 +69,8 @@ Here’s the amazing team behind this project:
 | ------------------- | ------------------------------------------- | --------------------------------------------------------------- |
 | **Sayed Kabir**     | Guesser Page, Streaks, Home Page                               | [SayedMK](https://github.com/SayedMK)                           |
 | **Kalab Smith**     | CSS for Desktop/Phone                                        | [K-Lab-Code](https://github.com/K-Lab-Code)                     |
-| **Elhadj Bah**      | Profile Page & Deploy.yml                 | [Elhadj-Bah](https://github.com/Elhadj-Bah)                     |
-| **Gavin Stockwell** | Backend Server, Frontend Mutations/Queries, Home Page | [Gavin-Scot-Stockwell](https://github.com/Gavin-Scot-Stockwell) |
+| **Elhadj Bah**      | Profile Page, Deploy.yml, README                 | [Elhadj-Bah](https://github.com/Elhadj-Bah)                     |
+| **Gavin Stockwell** | Backend Server, Frontend Mutations/Queries, Home Page, README | [Gavin-Scot-Stockwell](https://github.com/Gavin-Scot-Stockwell) |
 
 ---
 
