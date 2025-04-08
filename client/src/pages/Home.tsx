@@ -1,60 +1,82 @@
-import { Navigate, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
-
-import { QUERY_USER, QUERY_EMOJIS } from '../utils/queries';
-import EmojiList from '../components/EmojiList'; // Adjust the path as necessary
-
-import Auth from '../utils/auth';
+import { useEffect } from 'react';
+import { QUERY_EMOJIS_RANDOM } from '../utils/queries';
 
 const Home = () => {
-  const { username: userParam } = useParams();
-  const loggedInUsername = Auth.loggedIn() ? Auth.getProfile().data.username : null;
+  const { loading, data, refetch } = useQuery(QUERY_EMOJIS_RANDOM);
 
-  const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_EMOJIS, {
-    variables: { username: userParam || loggedInUsername },
-  });
+  useEffect(() => {
+    const interval = setInterval(() => {
+      refetch();
+    }, 10000); // Matches the 10s animation
 
-  const user = data?.me || data?.user || (userParam ? {} : { username: 'all users', emojis: [] });
-
-  if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
-    return <Navigate to="/Home" />;
-  }
+    return () => clearInterval(interval); // Clean up interval on unmount
+  }, [refetch]);
 
   if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (!Auth.loggedIn() || !user?.username) {
     return (
-      <h4>
-        Welcome to Symbol Sense!
-        Create your own cryptic messages with emojis! See if you can guess other peoples messages! 
-
-        <p>Looks like you need to login in to join the fun!</p>
-      </h4>
+      <div style={{ fontSize: '1.5rem', color: '#666', textAlign: 'center', marginTop: '20px' }}>
+        Loading...
+      </div>
     );
   }
 
   return (
-    <div>
-              <p>Welcome to Symbol Sense!
-              Create your own cryptic messages with emojis! See if 
-              you can guess other peoples messages! </p>
-      <div className="flex-row justify-center mb-3">
-        <div className="col-12 col-md-10 mb-5">
-          <EmojiList
-            emojis={data?.emojis || []} // Provide an empty array as a fallback
-            title={`${user?.username || "All user"} emojis`}
-          />
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        minHeight: '50vh',
+        fontFamily: 'Arial, sans-serif',
+        padding: '20px',
+      }}
+    >
+      <h4
+        style={{
+          textAlign: 'center',
+          fontSize: '1.5rem',
+          color: '#333',
+          marginBottom: '10px',
+        }}
+      >
+        Welcome to Symbol Sense!
+        <p>Create your own cryptic messages with emojis! See if you can guess other people's messages!</p>
+      </h4>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          width: '350px',
+          height: '250px',
+          backgroundColor: 'black',
+          border: '5px solid #333',
+          borderRadius: '20px',
+          boxShadow: '0 4px 10px rgba(0, 0, 0, 0.5)',
+          overflow: 'hidden',
+        }}
+      >
+        <div
+          style={{
+            fontSize: '5rem',
+            color: 'white',
+            animation: `fade 10s infinite`
+          }}
+        >
+          {data?.randomEmoji?.emojiText || 'No emoji found'}
         </div>
-        {!userParam && (
-          <div
-            className="col-12 col-md-10 mb-3 p-3"
-          >
-            {/* Additional content */}
-          </div>
-        )}
       </div>
+      <style>
+        {`
+          @keyframes fade {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
+          }
+        `}
+      </style>
     </div>
   );
 };
