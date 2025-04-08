@@ -3,8 +3,8 @@ const error = () => {
 
     return<main>
     
-    ERROR AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa
-    
+    <h2>Page not found</h2>
+    <p>Looks like something wrong has happened here..</p>
     </main>
     }
     

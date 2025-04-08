@@ -24,13 +24,37 @@ const AddEmoji = () => {
     return <div>Loading...</div>;
   }
 
+  const emojiDetect = /\p{Emoji}/u;
+  const keyboardDetect = /^[\p{L}\p{N}\p{P}\p{Zs}]*$/u;
+
+  
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
+    
+    const containsEmoji = emojiDetect.test(value);
+    const containsKeyboard = keyboardDetect.test(value);
 
-    setFormState({
-      ...formState,
-      [name]: value,
-    });
+    if(name === "emojiText")
+    {
+      if (
+        value.length <= 10 &&
+        (value === "" || (!containsKeyboard && containsEmoji))
+      ) {
+        setFormState({
+          ...formState,
+          [name]: value,
+        }); 
+      }
+  } else {
+    if (20 >= value.length) {
+      setFormState({
+        ...formState,
+        [name]: value,
+      });
+    }
+  }
+
+
   };
 
   const handleFormSubmit = async (event: FormEvent) => {
@@ -75,14 +99,7 @@ const AddEmoji = () => {
                   type="text"
                   value={formState.emojiDescription}
                   onChange={handleChange}
-                />
-                <input
-                  className="form-input"
-                  placeholder="Emoji Author"
-                  name="emojiAuthor"
-                  type="text"
-                  value={formState.emojiAuthor}
-                  onChange={handleChange}
+                  maxLength={1}
                 />
                 <button
                   className="btn btn-block btn-primary"
@@ -109,14 +126,7 @@ const AddEmoji = () => {
                   value={formState.emojiDescription}
                   onChange={handleChange}
                 />
-                <input
-                  className="form-input"
-                  placeholder="Emoji Author"
-                  name="emojiAuthor"
-                  type="text"
-                  value={formState.emojiAuthor}
-                  onChange={handleChange}
-                />
+
                 <button
                   className="btn btn-block btn-primary"
                   type="submit"

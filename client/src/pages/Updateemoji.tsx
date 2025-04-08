@@ -45,6 +45,44 @@ const Updateemoji = () => {
     });
   };
 
+
+const emojiDetect = /\p{Emoji}/u;
+const keyboardDetect = /^[\p{L}\p{N}\p{P}\p{Zs}]*$/u;
+
+
+
+
+
+const handleChangeFilter = (event: ChangeEvent<HTMLInputElement>) => {
+  const { name, value } = event.target;
+
+  const containsEmoji = emojiDetect.test(value);
+  const containsKeyboard = keyboardDetect.test(value);
+
+  if(name === "emojiText")
+  {
+    if (
+      value.length <= 10 &&
+      (value === "" || (!containsKeyboard && containsEmoji))
+    ) {
+      setFormState({
+        ...formState,
+        [name]: value,
+      }); 
+    }
+} else {
+  if (20 >= value.length) {
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
+  }
+}
+}
+
+
+
+
   const handleFormSubmit = async (event: FormEvent) => {
     event.preventDefault();
 
@@ -61,13 +99,12 @@ const Updateemoji = () => {
       console.error(e);
     }
   };
-//<LastPosted lastEmoji={data?.me?.lastEmoji || null} />
-
+  
   return (
     <main className="flex-row">
       <div className="col-12 col-lg-10">
         <div className="card">
-          <h4 className="card-header bg-dark text-light p-2">Add Emoji!</h4>
+          <h4 className="card-header bg-dark text-light p-2">Update Emoji!</h4>
           <div className="card-body">
                         {mutationData ? (
               <form onSubmit={handleFormSubmit}>
@@ -77,7 +114,7 @@ const Updateemoji = () => {
                   name="emojiText"
                   type="text"
                   value={formState.emojiText}
-                  onChange={handleChange}
+                  onChange={handleChangeFilter}
                 />
                 <input
                   className="form-input"
@@ -85,7 +122,7 @@ const Updateemoji = () => {
                   name="emojiDescription"
                   type="text"
                   value={formState.emojiDescription}
-                  onChange={handleChange}
+                  onChange={handleChangeFilter}
                 />
                 <label htmlFor="id-select">Choose Emoji</label>
                 <select
@@ -98,9 +135,9 @@ const Updateemoji = () => {
                     Select an Emoji
                   </option>
                   {data &&
-                    data.me.emojis.map((emoji: { _id: string; emojiText: string }) => (
+                    data.me.emojis.map((emoji: { _id: string; emojiText: string, emojiDescription: string}) => (
                       <option key={emoji._id} value={emoji._id}>
-                        {emoji.emojiText} ({emoji._id})
+                        {emoji.emojiText} ({emoji.emojiDescription}) You just updated this emoji!
                       </option>
                     ))}
                 </select>
@@ -119,7 +156,7 @@ const Updateemoji = () => {
                   name="emojiText"
                   type="text"
                   value={formState.emojiText}
-                  onChange={handleChange}
+                  onChange={handleChangeFilter}
                 />
                 <input
                   className="form-input"
@@ -127,7 +164,7 @@ const Updateemoji = () => {
                   name="emojiDescription"
                   type="text"
                   value={formState.emojiDescription}
-                  onChange={handleChange}
+                  onChange={handleChangeFilter}
                 />
                 <label htmlFor="id-select">Choose Emoji</label>
                 <select
@@ -142,7 +179,7 @@ const Updateemoji = () => {
                   {data &&
                     data.me.emojis.map((emoji: Emoji) => (
                       <option key={emoji._id} value={emoji._id}>
-                        {emoji.emojiText} ({emoji._id})
+                        {emoji.emojiText} ({emoji.emojiDescription})
                       </option>
                     ))}
                 </select>
