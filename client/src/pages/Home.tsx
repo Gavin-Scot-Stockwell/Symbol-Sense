@@ -72,13 +72,13 @@ const Home = () => {
       {`
     @keyframes fade {
       0% {
-        transform: scale(0.5);
+        transform: scale(0.2);
       }
       50% {
         transform: scale(1);
       }
       100% {
-        transform: scale(0.5);
+        transform: scale(0.2);
       }
     }
   `}
