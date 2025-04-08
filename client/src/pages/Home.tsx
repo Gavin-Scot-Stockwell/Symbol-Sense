@@ -27,14 +27,19 @@ const Home = () => {
   if (!Auth.loggedIn() || !user?.username) {
     return (
       <h4>
-        You need to be logged in to see this. Use the navigation links above to
-        sign up or log in!
+        Welcome to Symbol Sense!
+        Create your own cryptic messages with emojis! See if you can guess other peoples messages! 
+
+        <p>Looks like you need to login in to join the fun!</p>
       </h4>
     );
   }
 
   return (
     <div>
+              <p>Welcome to Symbol Sense!
+              Create your own cryptic messages with emojis! See if 
+              you can guess other peoples messages! </p>
       <div className="flex-row justify-center mb-3">
         <div className="col-12 col-md-10 mb-5">
           <EmojiList
