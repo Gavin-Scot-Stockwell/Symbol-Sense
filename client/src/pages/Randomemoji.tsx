@@ -97,6 +97,7 @@ const Randomemojis = () => {
 
                 <button
                   onClick = {handleNext}
+                  className = "next"
                  
                 >
                   {nextButton}

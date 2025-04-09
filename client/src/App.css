@@ -48,6 +48,13 @@
   /*margin: 0 auto;*/
   /*padding: 2rem;*/
   /*text-align: center;*/
+  --header-size: 4rem;
+  --form-size: 3rem;
+  --button-size: 3rem;
+  --emoji-size: 6rem;
+  --header-big-size: 4.5rem; /*header same size but needs be adususted h3*/
+  --timestamp-size: 1rem;
+
 
 
 }
@@ -200,9 +207,11 @@ body.route-signup header a[href="/signup"]{
   background-color: white;
 }*/
 
+/*Home Page*/
+
 body.route-home div.container h3 {
   text-align: center;
-  font-size: 4rem;
+  font-size: var(--header-big-size);
 }
 
 body.route-home .card {
@@ -212,17 +221,19 @@ body.route-home .card {
 }
 
 body.route-home .card h4 {
-  font-size: 1rem;
+  font-size: var(--timestamp-size);
   text-align: left;
 }
 
 body.route-home .card-body p:nth-child(1) {
-  font-size: 6rem;
+  font-size: var(--emoji-size);
 }
 
+/*
 body.route-home .card-body p:nth-child(2) {
   font-size: 3rem;
 }
+  */
 
 /*Focuses on Profile Page*/
 body.route-me div.container h2 {
@@ -241,68 +252,83 @@ body.route-me .card {
 }
 
 body.route-me .card h4 {
-  font-size: 1rem;
+  font-size: var(--timestamp-size);
   text-align: left;
 }
 
 body.route-me .card-body p:nth-child(1) {
-  font-size: 6rem;
+  font-size: var(--emoji-size);
 }
-
+/*
 body.route-me .card-body p:nth-child(2) {
   font-size: 3rem;
 }
+  */
 
 
-div > div.container > div > h1 {
+div>div.container>div>h1 {
   font-size: 2rem;
 }
-div > div.container > div > p {
+
+div>div.container>div>p {
   background-color: white;
   color: black;
   text-align: left;
   /*TODO Might need to change*/
 }
 
-/*Random Emoji*/
+/*Emoji Guesser*/
 
 body.route-randomemoji div.container .col-12>div {
   text-align: center;
-  font-size: 6rem;
+  font-size: var(--emoji-size);
 }
 
 body.route-randomemoji div.container .col-12>form {
   text-align: center;
-  font-size: 3rem;
+  font-size: var(--form-size);
 }
 
-div > div.container > div > div p {
+div>div.container>div>div p {
   background-color: white;
   color: black;
   font-size: 3rem;
 }
-div > div.container > div > div > div > * {
+
+div>div.container>div>div>div>* {
   margin-top: 3%;
   margin-bottom: 3%
 }
 
+
+/*Next button on Emoji Guesser Page*/
+body.route-randomemoji div.container .col-12 {
+  text-align: center;
+}
+
+.next {
+  font-size: var(--button-size);
+}
+
+/*End of Next Button*/
+
 /*Add Emoji*/
 body.route-addemoji div.container h4 {
   text-align: center;
-  font-size: 3rem;
+  font-size: var(--header-size);
 }
 
 body.route-addemoji div.container .card-body {
   text-align: center;
-  font-size: 1.6rem;
+  font-size: var(--form-size);/*1.6rem*/
 }
 
-body.route-addemoji div.container .card > h4 {
+body.route-addemoji div.container .card>h4 {
   margin-top: 2.5%;
   margin-bottom: 2.5%
 }
 
-body.route-addemoji div.container .card-body form > * {
+body.route-addemoji div.container .card-body form>* {
   margin-top: 1%;
   margin-bottom: 1%
 }
@@ -311,12 +337,12 @@ body.route-addemoji div.container .card-body form > * {
 /*Update Emoji*/
 body.route-updateemoji div.container h4 {
   text-align: center;
-  font-size: 3rem;
+  font-size: var(--header-size);
 }
 
 body.route-updateemoji div.container .card-body {
   text-align: center;
-  font-size: 2rem;
+  font-size: var(--form-size);/*2rem*/
   /*TODO improve how it looks with input fields*/
 }
 
@@ -329,12 +355,12 @@ body.route-updateemoji div.container .card-body {
 /*Remove Emoji*/
 body.route-removeemoji div.container h4 {
   text-align: center;
-  font-size: 3rem;
+  font-size: var(--header-size);
 }
 
 body.route-removeemoji div.container .card-body {
   text-align: center;
-  font-size: 3rem;
+  font-size: var(--form-size);
 }
 
 body.route-removeemoji div.container .card-header,
@@ -343,14 +369,25 @@ body.route-route-removeemoji div.container .card-body {
   margin-bottom: 2.5%
 }
 
+
+
 /*Media size css*/
-/*use to fixalignment of elements in larger webpages*/
+/*use to fix alignment of elements in larger webpages*/
 @media (min-width: 992px) {
 
   div.container>div>div.flex-row {
     padding-left: 15%;
     /*use this only when big responsive works diffrent for diffrent pages over 1010, 1020*/
   }
+
+  .home-info {
+    padding-left: 17%;
+    width: 100%;
+    text-align: center;
+    color: blue;
+
+  }
+
 }
 
 @media (min-width: 1200px) {
@@ -358,58 +395,11 @@ body.route-route-removeemoji div.container .card-body {
     padding-left: 15%;
     /*use this only when big responsive works diffrent for diffrent pages over 1010, 1020*/
   }
+
 }
 
 /*changes navigate bar based on size*/
-@media (max-width: 802px) {
-
-  /*This is for basically tablets*/
-  /*
-  header>div.container {
-    text-align: center;
-    box-sizing: border-box;
-    max-width: 100%;
-    width: 99.9%;
-    display: inline;
-  }
-
-  header button,
-  .btn-info,
-  .btn,
-  header button.btn.btn-lg {
-    background-color: aqua;
-    color: black;
-    border: 1px solid transparent;
-    border-radius: 0;
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0px;
-    transition: background-color 0.5s ease, transform 0.5s ease;
-
-
-  }
-
-  header button:hover,
-  .btn-info:hover,
-  .btn:hover {
-    background-color: #4CAF50;
-    color: white;
-    border: 1px solid transparent;
-
-  }
-
-  body.route-me header a[href="/me"],
-  body.route-randomemoji header a[href="/randomemoji"],
-  body.route-addemoji header a[href="/addemoji"],
-  body.route-login header a[href="/login"],
-  body.route-signup header a[href="/signup"],
-  body.route-updateemoji header a[href="/updateemoji"],
-  body.route-removeemoji header a[href="/removeemoji"] {
-    color: black;
-    background-color: white;
-  }*/
-}
-
-@media (max-width: 802px) {
+@media (max-width: 816px) {
 
   /*This is for basically phones*/
   header>div.container>div {
@@ -465,12 +455,20 @@ body.route-route-removeemoji div.container .card-body {
     color: black;
     background-color: aqua;
   }
+
   header button:hover,
   .btn-info:hover,
   .btn:hover,
-  header button.btn.btn-lg:hover {
+  header button.btn.btn-lg:hover,
+  body.route-me header a[href="/me"]:hover,
+  body.route-randomemoji header a[href="/randomemoji"]:hover,
+  body.route-addemoji header a[href="/addemoji"]:hover,
+  body.route-login header a[href="/login"]:hover,
+  body.route-signup header a[href="/signup"]:hover,
+  body.route-updateemoji header a[href="/updateemoji"]:hover,
+  body.route-removeemoji header a[href="/removeemoji"]:hover {
     background-color: #4CAF50;
     color: white;
   }
-    
+
 }

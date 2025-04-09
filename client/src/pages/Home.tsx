@@ -37,14 +37,14 @@ const Home = () => {
 
   return (
     <div>
-              <p>Welcome to Symbol Sense!
+              <p className="home-info">Welcome to Symbol Sense!
               Create your own cryptic messages with emojis! See if 
               you can guess other peoples messages! </p>
       <div className="flex-row justify-center mb-3">
         <div className="col-12 col-md-10 mb-5">
           <EmojiList
             emojis={data?.emojis || []} // Provide an empty array as a fallback
-            title={`${user?.username || "All user"} emojis`}
+            title={`${user?.username || "All User"} emojis`}
           />
         </div>
         {!userParam && (
