@@ -78,8 +78,8 @@ Here’s the amazing team behind this project:
 
 Please contact use at the following...
 | Name | Email |
-|-------------------|-------------------------------|
-| **Sayed Kabir** | ... |
-| **Kalab Smith** | ... | kalabsb@me.com |
-| **Elhadj Bah** | ... |
+|-------------------  |-------------------------------|
+| **Sayed Kabir**     | kabirsayed56@gmail.com |
+| **Kalab Smith**     | kalabsb@me.com |
+| **Elhadj Bah**      | elhadjamadoubah@gmail.com |
 | **Gavin Stockwell** | gsstockwell@gmail.com |
