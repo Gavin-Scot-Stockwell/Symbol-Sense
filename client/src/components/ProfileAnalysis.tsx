@@ -9,6 +9,7 @@ interface Emoji {
   emojiText: string;
   emojiDescription: string;
   wordCount: number;
+  weeklyEmoji: number;
 }
 
 // const ProfileAnalysis: React.FC<EmojiListProps> = ({ emojis }) => {
@@ -19,11 +20,14 @@ const ProfileAnalysis: React.FC = () => {
     user.emojis.reduce((acc: number, emoji: Emoji) => acc + emoji.wordCount, 0)
   );
   const [postCount] = useState(() => user.emojis.length);
+  // const [weeklyEmoji] = useState(() => user.emojis);
+
   return (
     <>
       {/* Display the total number of words */}
       <h2>Number of Words: {wordCount}</h2>
       <h2>Number of Posts: {postCount}</h2>
+      {/* <h2> Weekly Emoji Posted:{weeklyEmoji}</h2> */}
     </>
     // // Calculate the total number of words
 
