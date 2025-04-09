@@ -48,7 +48,7 @@ const typeDefs = `
     me: User
     randomEmoji: Emoji
     lastEmoji: Emoji
-    // weeklyEmoji: [Emoji]
+    weeklyEmoji: [Emoji]
   }
 
   type Mutation {
