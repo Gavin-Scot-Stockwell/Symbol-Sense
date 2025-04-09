@@ -54,7 +54,9 @@
   --emoji-size: 6rem;
   --header-big-size: 4.5rem; /*header same size but needs be adususted h3*/
   --timestamp-size: 1rem;
-
+  --primary-color: #337ab7;
+  --secondary-color: aqua;
+  --highlight-color: #4CAF50;
 
 
 }
@@ -82,7 +84,7 @@ header button,
 .btn-info,
 .btn,
 header button.btn.btn-lg {
-  background-color: aqua;
+  background-color: var(secondary-color);
   color: black;
   border: 1px solid transparent;
   border-radius: 0;
@@ -96,7 +98,7 @@ header button.btn.btn-lg {
 header button:hover,
 .btn-info:hover,
 .btn:hover {
-  background-color: #4CAF50;
+  background-color: var(highlight-color);
   color: white;
   border: 1px solid transparent;
 
@@ -122,13 +124,13 @@ body.route-removeemoji header a[href="/removeemoji"] {
 div>a>h1 {
   text-align: center;
   color: white;
-  background-color: #337ab7;
+  background-color: var(primary-color);
 }
 
 div>p {
   text-align: center;
   color: white;
-  background-color: #337ab7;
+  background-color: var(primary-color);
 }
 
 header a {
@@ -173,7 +175,7 @@ footer {
 
 /* general components */
 div.container button {
-  background-color: aqua;
+  background-color: var(secondary-color);
   color: black;
   border: 1px solid transparent;
   border-radius: 0;
@@ -184,7 +186,7 @@ div.container button {
 }
 
 div.container button:hover {
-  background-color: #4CAF50;
+  background-color: var(highlight-color);
   color: white;
   border: 1px solid transparent;
 }
@@ -384,7 +386,6 @@ body.route-route-removeemoji div.container .card-body {
     padding-left: 17%;
     width: 100%;
     text-align: center;
-    color: blue;
 
   }
 
@@ -434,7 +435,7 @@ body.route-route-removeemoji div.container .card-body {
   .btn-info,
   .btn,
   header button.btn.btn-lg {
-    background-color: aqua;
+    background-color: var(secondary-color);
     color: black;
     border: 1px solid transparent;
     border-radius: 0;
@@ -453,7 +454,7 @@ body.route-route-removeemoji div.container .card-body {
   body.route-updateemoji header a[href="/updateemoji"],
   body.route-removeemoji header a[href="/removeemoji"] {
     color: black;
-    background-color: aqua;
+    background-color: var(secondary-color);
   }
 
   header button:hover,
@@ -467,8 +468,16 @@ body.route-route-removeemoji div.container .card-body {
   body.route-signup header a[href="/signup"]:hover,
   body.route-updateemoji header a[href="/updateemoji"]:hover,
   body.route-removeemoji header a[href="/removeemoji"]:hover {
-    background-color: #4CAF50;
+    background-color: var(highlight-color);
     color: white;
   }
 
+}
+
+@media (max-width: 407px) {
+  .resize {
+    width: 100%;
+    max-width: 100%;
+  }
+/*when in phone mode should resize some code to make sure its width is not too big*/
 }
