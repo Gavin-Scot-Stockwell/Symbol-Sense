@@ -80,6 +80,6 @@ Please contact use at the following...
 | Name | Email |
 |-------------------|-------------------------------|
 | **Sayed Kabir** | ... |
-| **Kalab Smith** | ... |
+| **Kalab Smith** | ... | kalabsb@me.com |
 | **Elhadj Bah** | ... |
 | **Gavin Stockwell** | gsstockwell@gmail.com |

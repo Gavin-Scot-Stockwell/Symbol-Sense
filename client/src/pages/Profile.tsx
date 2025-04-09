@@ -37,9 +37,11 @@ const Profile = () => {
   console.log(user, "User data");
   return (
     <div>
-      <h1>Profile stats:</h1>
-      {/* <ProfileAnalysis title="Test" emojis={[]} /> */}
-      <ProfileAnalysis />
+      <div className="stat-box">
+        <h1>Profile stats:</h1>
+        {/* <ProfileAnalysis title="Test" emojis={[]} /> */}
+        <ProfileAnalysis />
+      </div>
       <div className="flex-row justify-center mb-3">
         <h2 className="col-12 col-md-10 bg-dark text-light p-3 mb-5">
           Viewing {userParam ? `${user.username}'s` : "your"} profile.
