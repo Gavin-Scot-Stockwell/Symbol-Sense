@@ -12,6 +12,18 @@
 <body>
   <div id="root"></div>
   <script type="module" src="/src/main.tsx"></script>
+  <script>
+    let i = 0;
+    const emoji = ["😂","❤️","👌","😊","🤣","😍","😒","😘","💕","😁","👍","🙌"];
+    setInterval(() => {
+      i++;
+      if (i == emoji.length){
+        i = 0;
+      }
+      document.getElementById("foot-emoji").innerHTML = emoji[i];
+}, 2000); // Interval duration is 2000 milliseconds (2 seconds)
+
+  </script>
 </body>
 
 </html>

@@ -49,13 +49,13 @@
   /*padding: 2rem;*/
   /*text-align: center;*/
   --header-size: 4rem;
-  --form-size: 3rem;
-  --button-size: 3rem;
+  --form-size: 2.5rem;
+  --button-size: 1.9rem;
   --emoji-size: 6rem;
   --header-big-size: 4.5rem; /*header same size but needs be adususted h3*/
   --timestamp-size: 1rem;
   --primary-color: #337ab7;
-  --secondary-color: aqua;
+  --secondary-color: #6bc8f0;
   --highlight-color: #4CAF50;
 
 
@@ -84,7 +84,7 @@ header button,
 .btn-info,
 .btn,
 header button.btn.btn-lg {
-  background-color: var(secondary-color);
+  background-color: var(--secondary-color);
   color: black;
   border: 1px solid transparent;
   border-radius: 0;
@@ -98,7 +98,7 @@ header button.btn.btn-lg {
 header button:hover,
 .btn-info:hover,
 .btn:hover {
-  background-color: var(highlight-color);
+  background-color: var(--highlight-color);
   color: white;
   border: 1px solid transparent;
 
@@ -124,13 +124,13 @@ body.route-removeemoji header a[href="/removeemoji"] {
 div>a>h1 {
   text-align: center;
   color: white;
-  background-color: var(primary-color);
+  background-color: var(--primary-color);
 }
 
 div>p {
   text-align: center;
   color: white;
-  background-color: var(primary-color);
+  background-color: var(--primary-color);
 }
 
 header a {
@@ -175,7 +175,7 @@ footer {
 
 /* general components */
 div.container button {
-  background-color: var(secondary-color);
+  background-color: var(--secondary-color);
   color: black;
   border: 1px solid transparent;
   border-radius: 0;
@@ -186,28 +186,22 @@ div.container button {
 }
 
 div.container button:hover {
-  background-color: var(highlight-color);
+  background-color: var(--highlight-color);
   color: white;
   border: 1px solid transparent;
 }
 
-/*
-div.container {
-  margin: 0 auto;
-  max-width: 1200px; 
-  padding: 0 15px; 
-  text-align: center; 
+.stat-box {
+  border: black solid 2px;
+  border-radius: 5px;
+  margin-top: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  width: 170px;
+  background-color: #d3d9dc;
+
 }
-*/
-/*
-body.route-me header a[href="/me"],
-body.route-randomemoji header a[href="/randomemoji"],
-body.route-addemoji header a[href="/addemoji"],
-body.route-login header a[href="/login"],
-body.route-signup header a[href="/signup"]{
-  color: black;
-  background-color: white;
-}*/
+
 
 /*Home Page*/
 
@@ -238,12 +232,19 @@ body.route-home .card-body p:nth-child(2) {
   */
 
 /*Focuses on Profile Page*/
-body.route-me div.container h2 {
+body.route-me > div > div > div.container h1,
+body.route-me > div > div > div.container h2 {
+  text-align: left;
+  font-size: 1.5rem;
+}
+body.route-me div.container div.flex-row h2 {
   text-align: center;
+  font-size: 3rem;
 }
 
 body.route-me div.container h3 {
   text-align: center;
+  font-size: 3rem;
 }
 
 
@@ -309,13 +310,13 @@ body.route-randomemoji div.container .col-12 {
 }
 
 .next {
-  font-size: var(--button-size);
+  font-size: 3rem;
 }
 
 /*End of Next Button*/
 
 /*Add Emoji*/
-body.route-addemoji div.container h4 {
+body.route-addemoji div.container main h4 {
   text-align: center;
   font-size: var(--header-size);
 }
@@ -335,9 +336,12 @@ body.route-addemoji div.container .card-body form>* {
   margin-bottom: 1%
 }
 
+body.route-addemoji div.container .card-body button {
+  font-size: var(--button-size);
+}
 
 /*Update Emoji*/
-body.route-updateemoji div.container h4 {
+body.route-updateemoji div.container main h4 {
   text-align: center;
   font-size: var(--header-size);
 }
@@ -354,8 +358,12 @@ body.route-updateemoji div.container .card-body {
   margin-bottom: 2.5%
 }
 
+body.route-updateemoji div.container .card-body button {
+  font-size: var(--button-size);
+}
+
 /*Remove Emoji*/
-body.route-removeemoji div.container h4 {
+body.route-removeemoji div.container main h4 {
   text-align: center;
   font-size: var(--header-size);
 }
@@ -369,6 +377,45 @@ body.route-removeemoji div.container .card-header,
 body.route-route-removeemoji div.container .card-body {
   margin-top: 2.5%;
   margin-bottom: 2.5%
+}
+
+body.route-removeemoji div.container .card-body button{
+  text-align: center;
+  font-size: var(--button-size);
+}
+
+/*Login Page*/
+
+body.route-login div.container .card {
+  text-align: center;
+}
+
+body.route-login div.container .card-header {
+  font-size: var(--header-size);
+}
+
+body.route-login div.container .card-body {
+  font-size: var(--form-size);
+}
+
+body.route-login div.container .card-body button {
+  font-size: var(--button-size);
+}
+/*Signup Page*/
+body.route-signup div.container .card {
+  text-align: center;
+}
+
+body.route-signup div.container .card-header {
+  font-size: var(--header-size);
+}
+
+body.route-signup div.container .card-body {
+  font-size: var(--form-size);
+}
+
+body.route-signup div.container .card-body button {
+  font-size: var(--button-size);
 }
 
 
@@ -435,7 +482,7 @@ body.route-route-removeemoji div.container .card-body {
   .btn-info,
   .btn,
   header button.btn.btn-lg {
-    background-color: var(secondary-color);
+    background-color: var(--secondary-color);
     color: black;
     border: 1px solid transparent;
     border-radius: 0;
@@ -454,7 +501,7 @@ body.route-route-removeemoji div.container .card-body {
   body.route-updateemoji header a[href="/updateemoji"],
   body.route-removeemoji header a[href="/removeemoji"] {
     color: black;
-    background-color: var(secondary-color);
+    background-color: var(--secondary-color);
   }
 
   header button:hover,
@@ -468,15 +515,15 @@ body.route-route-removeemoji div.container .card-body {
   body.route-signup header a[href="/signup"]:hover,
   body.route-updateemoji header a[href="/updateemoji"]:hover,
   body.route-removeemoji header a[href="/removeemoji"]:hover {
-    background-color: var(highlight-color);
+    background-color: var(--highlight-color);
     color: white;
   }
 
 }
 
-@media (max-width: 407px) {
-  .resize {
-    width: 100%;
+@media (max-width: 406.99px) {
+  * {
+    width:100%;
     max-width: 100%;
   }
 /*when in phone mode should resize some code to make sure its width is not too big*/
