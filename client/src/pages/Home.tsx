@@ -22,16 +22,50 @@ const Home = () => {
   }
 
   return (
-    <div>
-              <p className="home-info">Welcome to Symbol Sense!
-              Create your own cryptic messages with emojis! See if 
-              you can guess other peoples messages! </p>
-      <div className="flex-row justify-center mb-3">
-        <div className="col-12 col-md-10 mb-5">
-          <EmojiList
-            emojis={data?.emojis || []} // Provide an empty array as a fallback
-            title={`${user?.username || "All User"} emojis`}
-          />
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        minHeight: '50vh',
+        fontFamily: 'Arial, sans-serif',
+        padding: '20px',
+      }}
+    >
+      <h4
+        style={{
+          textAlign: 'center',
+          fontSize: '1.5rem',
+          color: '#333',
+          marginBottom: '10px',
+        }}
+      >
+        Welcome to Symbol Sense!
+        <p>Create your own cryptic messages with emojis! See if you can guess other people's messages!</p>
+      </h4>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          width: '350px',
+          height: '250px',
+          backgroundColor: 'black',
+          border: '5px solid #333',
+          borderRadius: '20px',
+          boxShadow: '0 4px 10px rgba(0, 0, 0, 0.5)',
+          overflow: 'hidden',
+        }}
+      >
+        <div
+          style={{
+            fontSize: '5rem',
+            color: 'white',
+            animation: `fade 10s infinite`
+          }}
+        >
+          {data?.randomEmoji?.emojiText || 'No emoji found'}
         </div>
       </div>
       <style>
