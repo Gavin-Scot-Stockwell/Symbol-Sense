@@ -16,6 +16,9 @@ const Randomemojis = () => {
   const [userInput, setUserInput] = useState('');
   const [feedback, setFeedback] = useState('');
   const [nextButton, setNextButton] = useState('Next'); // when the user sumbits the answer, this will change toNext after the answer 
+  const [revealLetters, setRevealedLetters] = useState(0);
+   // this is to reveal the letters of the answer
+  const [streak, setStreak] = useState(0);
 
   const user = data?.me || data?.user || (userParam ? {} : { username: ' ', emojis: [] });
 
@@ -45,18 +48,28 @@ const Randomemojis = () => {
 
   const handleSubmit = (event : React.FormEvent) => {
     event.preventDefault(); // Prevent the form from submitting and refreshing the page
-  const correctAnswer = data?.randomEmoji?.emojiDescription || ''; 
+  
+    const correctAnswer = data?.randomEmoji?.emojiDescription || ''; 
 
    if (userInput.toLowerCase() === correctAnswer.toLowerCase()) {
     setFeedback('Correct!'); 
 
-    setNextButton('Congrats, guess the next emoji!');  
+    setNextButton('Congrats, guess the next emoji!'); 
+    
+    setRevealedLetters(0);
+
+    setStreak((prev) => prev + 1);
     
    }
    else {
     setFeedback('Try again!'); 
 
-    setNextButton('Too tough? Here is a hint: ' + correctAnswer);
+    setNextButton('Too tough?'); 
+
+    setRevealedLetters((prev) => Math.min(prev + 3 , correctAnswer.length)); 
+    // reveals 3 letters at a time
+
+    setStreak(0);
    }
     // now its gonna empty the input 
     setUserInput('');
@@ -68,9 +81,14 @@ const Randomemojis = () => {
     setFeedback(''); 
     setUserInput('');
     setNextButton('Next');
+    setRevealedLetters(0);
+    //right here will reset the letters to 0
   };
 
-//
+  const correctAnswer = data?.randomEmoji?.emojiDescription || '';
+  const hint = correctAnswer.slice(0, revealLetters);
+
+
 
 
   return (
@@ -94,6 +112,12 @@ const Randomemojis = () => {
                   </form>
                   <p>{feedback}
                   </p>
+                  {revealLetters > 0 && feedback != 'Correct!' &&  (
+                    <p>Hint: {hint}</p>
+                  )}
+                  {/* this is to show the hint and hints will go away once the user finally gets it right!!!*/}
+                <p>Streak: {streak} 🔥 </p>
+
 
                 <button
                   onClick = {handleNext}
