@@ -1,9 +1,13 @@
-import { useState, type FormEvent, type ChangeEvent } from 'react';
+// const AddEmoji = () => {
+//   return <div>Test</div>;
+// };
 
+// export default AddEmoji;
+
+import { useState, type FormEvent, type ChangeEvent } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
 import { ADD_EMOJI } from '../utils/mutations';
 import { QUERY_LAST_EMOJI } from '../utils/queries';
-
 import { useParams } from 'react-router-dom';
 
 const AddEmoji = () => {
@@ -13,9 +17,9 @@ const AddEmoji = () => {
     emojiAuthor: '',
   });
 
-  const [addEmoji, { error, data: mutationData }] = useMutation(ADD_EMOJI);
-
+  const [addEmoji, { error }] = useMutation(ADD_EMOJI);
   const { username: userParam } = useParams();
+
   const { loading, data, refetch } = useQuery(QUERY_LAST_EMOJI, {
     variables: { username: userParam },
   });
@@ -24,37 +28,24 @@ const AddEmoji = () => {
     return <div>Loading...</div>;
   }
 
-  const emojiDetect = /\p{Emoji}/u;
-  const keyboardDetect = /^[\p{L}\p{N}\p{P}\p{Zs}]*$/u;
-
-  
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    
-    const containsEmoji = emojiDetect.test(value);
-    const containsKeyboard = keyboardDetect.test(value);
+    const { name, value, type, files } = event.target;
 
-    if(name === "emojiText")
-    {
-      if (
-        value.length <= 10 &&
-        (value === "" || (!containsKeyboard && containsEmoji))
-      ) {
-        setFormState({
-          ...formState,
-          [name]: value,
-        }); 
-      }
-  } else {
-    if (20 >= value.length) {
-      setFormState({
-        ...formState,
+    if (type === 'file' && files && files[0]) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setFormState((prev) => ({
+          ...prev,
+          [name]: reader.result as string, // base64 image
+        }));
+      };
+      reader.readAsDataURL(files[0]);
+    } else {
+      setFormState((prev) => ({
+        ...prev,
         [name]: value,
-      });
+      }));
     }
-  }
-
-
   };
 
   const handleFormSubmit = async (event: FormEvent) => {
@@ -80,61 +71,54 @@ const AddEmoji = () => {
         <div className="card">
           <h4 className="card-header bg-dark text-light p-2">Add Emoji!</h4>
           <div className="card-body">
-            {mutationData ? (
-              <form onSubmit={handleFormSubmit}>
-                <p>Your emoji has been added {data.lastEmoji.emojiText}</p>
+            <form onSubmit={handleFormSubmit}>
+              <p>
+                Your emoji has been added{' '}
+                {data?.lastEmoji?.emojiText ? (
+                  <img
+                    src={data.lastEmoji.emojiText}
+                    alt="Last emoji"
+                    style={{ width: '2rem', height: '2rem' }}
+                  />
+                ) : (
+                  'None'
+                )}
+              </p>
 
-                <input
-                  className="form-input"
-                  placeholder="Emoji Name"
-                  name="emojiText"
-                  type="text"
-                  value={formState.emojiText}
-                  onChange={handleChange}
-                />
-                <input
-                  className="form-input"
-                  placeholder="Emoji Description"
-                  name="emojiDescription"
-                  type="text"
-                  value={formState.emojiDescription}
-                  onChange={handleChange}
-                  maxLength={1}
-                />
-                <button
-                  className="btn btn-block btn-primary"
-                  type="submit"
-                >
-                  Submit
-                </button>
-              </form>
-            ) : (
-              <form onSubmit={handleFormSubmit}>
-                <input
-                  className="form-input"
-                  placeholder="Emoji Name"
-                  name="emojiText"
-                  type="text"
-                  value={formState.emojiText}
-                  onChange={handleChange}
-                />
-                <input
-                  className="form-input"
-                  placeholder="Emoji Description"
-                  name="emojiDescription"
-                  type="text"
-                  value={formState.emojiDescription}
-                  onChange={handleChange}
-                />
+              <input
+                className="form-input"
+                placeholder="Emoji Image"
+                name="emojiText"
+                type="file"
+                accept="image/*"
+                onChange={handleChange}
+              />
 
-                <button
-                  className="btn btn-block btn-primary"
-                  type="submit"
-                >
-                  Submit
-                </button>
-              </form>
-            )}
+              {formState.emojiText && (
+                <div style={{ margin: '1rem 0' }}>
+                  <p>Preview:</p>
+                  <img
+                    src={formState.emojiText}
+                    alt="Preview"
+                    style={{ width: '4rem', height: '4rem' }}
+                  />
+                </div>
+              )}
+
+              <input
+                className="form-input"
+                placeholder="Emoji Description"
+                name="emojiDescription"
+                type="text"
+                value={formState.emojiDescription}
+                onChange={handleChange}
+                maxLength={1}
+              />
+
+              <button className="btn btn-block btn-primary" type="submit">
+                Submit
+              </button>
+            </form>
 
             {error && (
               <div className="my-3 p-3 bg-danger text-white">

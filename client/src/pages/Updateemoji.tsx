@@ -1,9 +1,8 @@
-import { useState, type FormEvent, type ChangeEvent } from 'react';
+import { useState, type FormEvent, useEffect, ChangeEvent } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
-import { UPDATE_EMOJI } from '../utils/mutations';
-import { QUERY_ME } from '../utils/queries'; // Removed QUERY_LAST_EMOJI
+import { UPDATE_EMOJI } from '../utils/mutations'; // <-- Your update mutation
+import { QUERY_ME } from '../utils/queries';
 import { useParams } from 'react-router-dom';
-//import LastPosted from '../components/LastPosted';
 
 interface Emoji {
   _id: string;
@@ -11,186 +10,154 @@ interface Emoji {
   emojiDescription: string;
 }
 
+const isImage = (text: string) =>
+  text.startsWith('http://') ||
+  text.startsWith('https://') ||
+  text.startsWith('data:image');
 
 const Updateemoji = () => {
-  const [formState, setFormState] = useState({
-    emojiText: '',
-    emojiDescription: '',
-    emojiId: '',
-  });
-
-  const [addEmoji, { error, data: mutationData }] = useMutation(UPDATE_EMOJI);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [description, setDescription] = useState<string>('');
+  const [image, setImage] = useState<string>('');
+  const [updateEmoji, { error }] = useMutation(UPDATE_EMOJI);
 
   const { username: userParam } = useParams();
-  const { loading, data, refetch } = useQuery(QUERY_ME, {
+  const { data, refetch } = useQuery(QUERY_ME, {
     variables: { username: userParam },
   });
 
-  if (!loading && data) {
-    const emojiData = data.me.lastEmoji; // Adjusted to use QUERY_ME
-    if (emojiData && formState.emojiId === '') {
-      setFormState({
-        emojiText: emojiData.emojiText || '',
-        emojiDescription: emojiData.emojiDescription || '',
-        emojiId: emojiData._id || '',
-      });
-    }
-  }
+  // Find the selected emoji object for preview
+  const selectedEmoji: Emoji | undefined =
+    data?.me?.emojis.find((emoji: Emoji) => emoji._id === selectedId);
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value } = event.target;
-    setFormState({
-      ...formState,
-      [name]: value,
-    });
+  // When a new emoji is selected, update the description and image fields
+  useEffect(() => {
+    if (selectedEmoji) {
+      setDescription(selectedEmoji.emojiDescription || '');
+      setImage(selectedEmoji.emojiText || '');
+    }
+  }, [selectedEmoji]);
+
+  // Handle image file input
+  const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setImage(reader.result as string);
+    };
+    reader.readAsDataURL(file);
   };
-
-
-const emojiDetect = /\p{Emoji}/u;
-const keyboardDetect = /^[\p{L}\p{N}\p{P}\p{Zs}]*$/u;
-
-
-
-
-
-const handleChangeFilter = (event: ChangeEvent<HTMLInputElement>) => {
-  const { name, value } = event.target;
-
-  const containsEmoji = emojiDetect.test(value);
-  const containsKeyboard = keyboardDetect.test(value);
-
-  if(name === "emojiText")
-  {
-    if (
-      value.length <= 10 &&
-      (value === "" || (!containsKeyboard && containsEmoji))
-    ) {
-      setFormState({
-        ...formState,
-        [name]: value,
-      }); 
-    }
-} else {
-  if (20 >= value.length) {
-    setFormState({
-      ...formState,
-      [name]: value,
-    });
-  }
-}
-}
-
-
-
 
   const handleFormSubmit = async (event: FormEvent) => {
     event.preventDefault();
 
+    if (!selectedId) return;
+
     try {
-      const { data } = await addEmoji({
-        variables: { input: { ...formState } },
+      const { data } = await updateEmoji({
+        variables: {
+          emojiId: selectedId,
+          emojiDescription: description,
+          emojiText: image,
+        },
       });
 
-      console.log('Emoji added:', data);
+      console.log('Emoji updated:', data);
 
       // Refetch the latest emoji data
       await refetch();
+      setSelectedId(null);
+      setDescription('');
+      setImage('');
     } catch (e) {
       console.error(e);
     }
   };
-  
+
   return (
-    <main className="flex-row">
+    <main className="flex-row justify-center mb-4">
       <div className="col-12 col-lg-10">
         <div className="card">
-          <h4 className="card-header bg-dark text-light p-2">Update Emoji!</h4>
+          <h4 className="card-header bg-dark text-light p-2">Update Image!</h4>
           <div className="card-body">
-                        {mutationData ? (
-              <form onSubmit={handleFormSubmit}>
-                <input
-                  className="form-input"
-                  placeholder="Emoji Name"
-                  name="emojiText"
-                  type="text"
-                  value={formState.emojiText}
-                  onChange={handleChangeFilter}
-                />
-                <input
-                  className="form-input"
-                  placeholder="Emoji Description"
-                  name="emojiDescription"
-                  type="text"
-                  value={formState.emojiDescription}
-                  onChange={handleChangeFilter}
-                />
-                <label htmlFor="id-select">Choose Emoji</label>
-                <select
-                  className="form-input"
-                  name="emojiId"
-                  onChange={handleChange}
-                  value={formState.emojiId}
-                >
-                  <option value="" disabled>
-                    Select an Emoji
-                  </option>
-                  {data &&
-                    data.me.emojis.map((emoji: { _id: string; emojiText: string, emojiDescription: string}) => (
-                      <option key={emoji._id} value={emoji._id}>
-                        {emoji.emojiText} ({emoji.emojiDescription}) You just updated this emoji!
-                      </option>
-                    ))}
-                </select>
-                <button
-                  className="btn btn-block btn-primary"
-                  type="submit"
-                >
-                  Submit
-                </button>
-              </form>
-            ) : (
-              <form onSubmit={handleFormSubmit}>
-                <input
-                  className="form-input"
-                  placeholder="Emoji Name"
-                  name="emojiText"
-                  type="text"
-                  value={formState.emojiText}
-                  onChange={handleChangeFilter}
-                />
-                <input
-                  className="form-input"
-                  placeholder="Emoji Description"
-                  name="emojiDescription"
-                  type="text"
-                  value={formState.emojiDescription}
-                  onChange={handleChangeFilter}
-                />
-                <label htmlFor="id-select">Choose Emoji</label>
-                <select
-                  className="form-input"
-                  name="emojiId"
-                  onChange={handleChange}
-                  value={formState.emojiId}
-                >
-                  <option value="" disabled>
-                    Select an Emoji
-                  </option>
-                  {data &&
-                    data.me.emojis.map((emoji: Emoji) => (
-                      <option key={emoji._id} value={emoji._id}>
-                        {emoji.emojiText} ({emoji.emojiDescription})
-                      </option>
-                    ))}
-                </select>
-                <button
-                  className="btn btn-block btn-primary"
-                  type="submit"
-                >
-                  Submit
-                </button>
-              </form>
-            )}
+            <form onSubmit={handleFormSubmit}>
+              <label htmlFor="id-select">Choose Image</label>
+              {data &&
+                data.me.emojis.map((emoji: Emoji) => (
+                  <div
+                    key={emoji._id}
+                    onClick={() => setSelectedId(emoji._id)}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      cursor: 'pointer',
+                      backgroundColor: selectedId === emoji._id ? 'lightblue' : 'transparent',
+                      padding: '0.5rem',
+                      borderRadius: '4px',
+                      marginBottom: '0.25rem',
+                    }}
+                  >
+                    {isImage(emoji.emojiText) ? (
+                      <img
+                        src={emoji.emojiText}
+                        alt={emoji.emojiDescription}
+                        style={{
+                          maxWidth: '100px',
+                          maxHeight: '100px',
+                          marginRight: '0.5rem',
+                        }}
+                      />
+                    ) : null}
+                    <span>
+                      {emoji.emojiDescription || emoji.emojiText}
+                    </span>
+                  </div>
+                ))}
+
+              {/* Preview and update form for the selected emoji */}
+              {selectedEmoji && (
+                <div style={{ margin: '1rem 0' }}>
+                  <p>Preview to update:</p>
+                  {isImage(image) ? (
+                    <img
+                      src={image}
+                      alt={description}
+                      style={{ width: '4rem', height: '4rem' }}
+                    />
+                  ) : (
+                    <span style={{ fontSize: '2rem' }}>{image}</span>
+                  )}
+                  <div>
+                    <strong>Description:</strong>
+                    <input
+                      type="text"
+                      value={description}
+                      onChange={e => setDescription(e.target.value)}
+                      style={{ marginLeft: '0.5rem' }}
+                    />
+                  </div>
+                  <div style={{ marginTop: '0.5rem' }}>
+                    <strong>Update Image:</strong>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleImageChange}
+                      style={{ marginLeft: '0.5rem' }}
+                    />
+                  </div>
+                </div>
+              )}
+
+              <button
+                className="btn btn-block btn-primary"
+                style={{ cursor: 'pointer' }}
+                type="submit"
+                disabled={!selectedId}
+              >
+                Update
+              </button>
+            </form>
 
             {error && (
               <div className="my-3 p-3 bg-danger text-white">
