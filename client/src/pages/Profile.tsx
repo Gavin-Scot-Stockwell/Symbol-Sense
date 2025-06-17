@@ -1,6 +1,6 @@
 import { Navigate, useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
-import ProfileAnalysis from "../components/ProfileAnalysis";
+//import ProfileAnalysis from "../components/ProfileAnalysis";
 
 import { QUERY_USER, QUERY_ME } from "../utils/queries";
 import EmojiList from "../components/EmojiList"; // Adjust the path as necessary
@@ -37,11 +37,7 @@ const Profile = () => {
   console.log(user, "User data");
   return (
     <div>
-      <div className="stat-box">
-        <h1>Profile stats:</h1>
-        {/* <ProfileAnalysis title="Test" emojis={[]} /> */}
-        <ProfileAnalysis />
-      </div>
+
       <div className="flex-row justify-center mb-3">
         <h2 className="col-12 col-md-10 bg-dark text-light p-3 mb-5">
           Viewing {userParam ? `${user.username}'s` : "your"} profile.
@@ -51,6 +47,7 @@ const Profile = () => {
           <EmojiList
             emojis={user?.emojis || []} // Provide an empty array as a fallback
             title={`${user?.username}'s emojis`}
+            
           />
         </div>
         {!userParam && <div className="col-12 col-md-10 mb-3 p-3"></div>}

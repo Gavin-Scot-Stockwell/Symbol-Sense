@@ -33,7 +33,7 @@ const Footer: React.FC = () => {
           >
             
           </span>{' '}
-          by Emoji Team <a id="foot-emoji">😂</a>
+          by Gavin Scot Stockwell<a id="foot-emoji"></a>
         </h4>
       </div>
     </footer>

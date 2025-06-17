@@ -54,10 +54,14 @@ No installation required! Simply visit the live website:
 
 ## 🎮 Usage
 
-1. **Create Your Own Emoji Posts**: Upload a string of emojis and challenge others to guess their meaning.
-2. **Guess Emoji Strings**: Try to guess the meaning behind emoji strings posted by others.
-3. **Have Fun**: Share your creativity and enjoy the emoji guessing game!
+1. **Create Your Own Emoji Posts**: Upload a string of emojis and challenge others to guess their meaning.  
+   <img src="img/addEmoji.PNG" alt="img showing the emoji adding process" width="400">
 
+2. **Guess Emoji Strings**: Try to guess the meaning behind emoji strings posted by others.  
+   <img src="img/guessing.PNG" alt="showing the guessing game part of the page" width="400">
+
+3. **Have Fun**: Share your creativity and enjoy the emoji guessing game!  
+   <img src="img/emojiFrontPage.PNG" alt="front page" width="400">
 ---
 
 ## 🤝 Contributing

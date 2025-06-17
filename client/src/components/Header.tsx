@@ -13,9 +13,9 @@ const Header = () => {
       <div className="container flex-row justify-space-between-lg justify-center align-center">
         <div>
           <Link className="text-light" to="/">
-            <h1 className="m-0">Symbol Sense</h1>
+            <h1 className="m-0">Livia</h1>
           </Link>
-          <p className="m-0">The Emoji Guessing Game</p>
+          <p className="m-0">Art Portfolio</p>
         </div>
         <div>
           {/* Checking if the user is logged in to conditionally render profile link and logout button */}
@@ -28,29 +28,22 @@ const Header = () => {
               <button className="btn btn-lg btn-light m-2" onClick={logout}>
                 Logout
               </button>
-              <Link className="btn btn-lg btn-light m-2" to="/randomemoji">
-                Emoji Guesser
-              </Link>
               <Link className="btn btn-lg btn-light m-2" to="/addemoji">
-                Add Emoji
-              </Link>
-              <Link className="btn btn-lg btn-light m-2" to="/updateemoji">
-                Update Emoji
+                Add Image
               </Link>
               <Link className="btn btn-lg btn-light m-2" to="/removeemoji">
-                Remove Emoji
+                Remove Image
+              </Link>
+              <Link className="btn btn-lg btn-light m-2" to="/updateemoji">
+                Update Image
               </Link>
             </>
           ) : (
             <>
-              <Link className="btn btn-lg btn-info m-2" to="/login">
-                Login
-              </Link>
-              <Link className="btn btn-lg btn-light m-2" to="/signup">
-                Signup
-              </Link>
+             
             </>
           )}
+             
         </div>
       </div>
     </header>
