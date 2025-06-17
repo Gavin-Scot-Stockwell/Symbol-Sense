@@ -69,11 +69,11 @@ const AddEmoji = () => {
     <main className="flex-row justify-center mb-4">
       <div className="col-12 col-lg-10">
         <div className="card">
-          <h4 className="card-header bg-dark text-light p-2">Add Emoji!</h4>
+          <h4 className="card-header bg-dark text-light p-2">Add Image!</h4>
           <div className="card-body">
             <form onSubmit={handleFormSubmit}>
               <p>
-                Your emoji has been added{' '}
+                Your Image has been added{' '}
                 {data?.lastEmoji?.emojiText ? (
                   <img
                     src={data.lastEmoji.emojiText}
@@ -107,7 +107,7 @@ const AddEmoji = () => {
 
               <input
                 className="form-input"
-                placeholder="Emoji Description"
+                placeholder="Image here"
                 name="emojiDescription"
                 type="text"
                 value={formState.emojiDescription}

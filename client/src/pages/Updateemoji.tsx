@@ -1,6 +1,6 @@
 import { useState, type FormEvent, useEffect, ChangeEvent } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
-import { UPDATE_EMOJI } from '../utils/mutations'; // <-- Your update mutation
+import { UPDATE_EMOJI } from '../utils/mutations';
 import { QUERY_ME } from '../utils/queries';
 import { useParams } from 'react-router-dom';
 
@@ -16,7 +16,7 @@ const isImage = (text: string) =>
   text.startsWith('data:image');
 
 const Updateemoji = () => {
-  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [selectId, setSelectedId] = useState<string | null>(null);
   const [description, setDescription] = useState<string>('');
   const [image, setImage] = useState<string>('');
   const [updateEmoji, { error }] = useMutation(UPDATE_EMOJI);
@@ -28,7 +28,7 @@ const Updateemoji = () => {
 
   // Find the selected emoji object for preview
   const selectedEmoji: Emoji | undefined =
-    data?.me?.emojis.find((emoji: Emoji) => emoji._id === selectedId);
+    data?.me?.emojis.find((emoji: Emoji) => emoji._id === selectId);
 
   // When a new emoji is selected, update the description and image fields
   useEffect(() => {
@@ -52,14 +52,16 @@ const Updateemoji = () => {
   const handleFormSubmit = async (event: FormEvent) => {
     event.preventDefault();
 
-    if (!selectedId) return;
+    if (!selectId) return;
 
     try {
       const { data } = await updateEmoji({
         variables: {
-          emojiId: selectedId,
-          emojiDescription: description,
-          emojiText: image,
+          input: {
+            emojiId: selectId,
+            emojiDescription: description,
+            emojiText: image,
+          }
         },
       });
 
@@ -92,7 +94,7 @@ const Updateemoji = () => {
                       display: 'flex',
                       alignItems: 'center',
                       cursor: 'pointer',
-                      backgroundColor: selectedId === emoji._id ? 'lightblue' : 'transparent',
+                      backgroundColor: selectId === emoji._id ? 'lightblue' : 'transparent',
                       padding: '0.5rem',
                       borderRadius: '4px',
                       marginBottom: '0.25rem',
@@ -153,7 +155,7 @@ const Updateemoji = () => {
                 className="btn btn-block btn-primary"
                 style={{ cursor: 'pointer' }}
                 type="submit"
-                disabled={!selectedId}
+                disabled={!selectId}
               >
                 Update
               </button>
